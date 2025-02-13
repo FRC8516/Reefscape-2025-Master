@@ -22,8 +22,27 @@ public final class Constants {
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
         public static final double kDriveDeadband = 0.15;  //@0.05
-        public static final int CANdleID = 21;
+        public static final int CANdleID = 27;
+        public static final int CANRangeID = 21;
       }
+
+      public static final class ManipulatorConstants {
+        //Intake Motors - Kraken X60
+        public static final int kIntakeMotor = 25;
+        //Claw Wraist Motor - Falcon 500
+        public static final int kIntakeWraistMotor = 24;
+        //Elevator Motor - Falcon 500
+        public static final int kElevatorMotorLeft = 22;
+        public static final int kElevatorMotorRight = 23;
+        //Intake feed time
+        public static final double kIntakeFeedTime = 6.0;
+        //Position Intake Wraist time out
+        public static final double kIntakeWraistTime = 0.10;
+        //Shooter Wraist time out
+        public static final double kShooterWraistTime = 1.0;
+        //Climber
+        public static final int kClimberMotor = 26;
+    }
 
     //Led lights
     public static final class LedLights {
