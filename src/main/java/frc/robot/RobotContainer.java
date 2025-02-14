@@ -11,18 +11,18 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
-import frc.robot.subsystems.ClawIntake;
-import frc.robot.subsystems.ClawWraist;
-import frc.robot.subsystems.Elvator;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-import frc.robot.Constants.ElevatorPositions;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.ClawIntake;
+import frc.robot.subsystems.ClawWraist;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.Elvator;
 
 public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
