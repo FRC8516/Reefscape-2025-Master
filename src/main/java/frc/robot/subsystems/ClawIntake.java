@@ -10,6 +10,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ManipulatorConstants;
 import frc.robot.Constants.OIConstants;
@@ -32,7 +33,8 @@ public class ClawIntake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    isCoralDetected();
+    SmartDashboard.putBoolean("Coral Detected?", isCoralDetected());
+  
   }
   public void Intake(){
     m_timer.start();
@@ -49,10 +51,10 @@ public class ClawIntake extends SubsystemBase {
     m_timer.start();
       while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
         m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
-      if(isCoralDetected() == true){
-        break;
+        if(isCoralDetected() == true){
+          break;
+        }
       }
-    }
     m_timer.stop();
     m_timer.reset();
   }

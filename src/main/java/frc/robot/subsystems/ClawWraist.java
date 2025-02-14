@@ -153,5 +153,5 @@ public class ClawWraist extends SubsystemBase {
         Preferences.setDouble(key, backup);
       }
       return Preferences.getDouble(key, backup);
-      }
+    }
 }
