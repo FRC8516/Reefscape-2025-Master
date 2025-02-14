@@ -11,13 +11,16 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
-
+import frc.robot.subsystems.ClawIntake;
+import frc.robot.subsystems.ClawWraist;
+import frc.robot.subsystems.Elvator;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import frc.robot.Constants.ElevatorPositions;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
@@ -36,9 +39,12 @@ public class RobotContainer {
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
     private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController operator = new CommandXboxController(1);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
+    public final ClawIntake m_ClawIntake = new ClawIntake();
+    public final ClawWraist m_ClawWraist = new ClawWraist();
+    public final Elvator m_elevator = new Elvator();
     public RobotContainer() {
         autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
@@ -56,7 +62,6 @@ public class RobotContainer {
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
-
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.b().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
@@ -71,7 +76,22 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        //elevator buttons
+        operator.leftTrigger().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("HomePosition")));
+        operator.leftBumper().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("LoadingPosition")));
+        operator.povUp().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L1Position")));
+        operator.povRight().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L2Position")));
+        operator.povDown().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L3Position")));
+        operator.povLeft().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L4Position")));
 
+        //Claw Buttons
+        operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
+        operator.rightBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
+        operator.y().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("HomePosition")));
+        operator.x().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("ScoringPosition")));
+        operator.a().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("TransferPostion")));
+        operator.b().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("LoadingPosition")));
+        
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 

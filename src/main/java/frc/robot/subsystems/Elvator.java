@@ -108,7 +108,7 @@ public class Elvator extends SubsystemBase {
      aCurrentPosition = m_ElevatorMotorL.getPosition();
      SmartDashboard.putNumber("Elevator Position", aCurrentPosition.getValueAsDouble());
   }
-
+  
   //Call by the commands to move claw wraist to positions
   public void MoveElevatorToPosition(String sMoveTo) {
     //set up the grab from values at Smart Dashboard perference table
