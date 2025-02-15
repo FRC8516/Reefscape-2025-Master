@@ -21,5 +21,6 @@ Actuators: Falcon 500, using Pigeon 2.
 It is possible that this project will not work for your robot right out of the box. Various things like the CAN IDs, PIDF gains, chassis configuration, etc. must be determined for your own robot!
 
 These values can be adjusted in the `Constants.java` file.
+Motor configuration is in the 'CalibrationSettings.java' file.
 
 ## Updated During Season
