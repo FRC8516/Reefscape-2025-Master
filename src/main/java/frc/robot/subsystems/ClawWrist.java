@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CalibrationSettings;
 import frc.robot.Constants.ClawPositions;
 import frc.robot.Constants.ManipulatorConstants;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClawWrist extends SubsystemBase {
       /* Hardware */

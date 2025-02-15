@@ -131,7 +131,7 @@ public class Elevator extends SubsystemBase {
      // This method will be called once per scheduler run
      //Updates position on the dashboard
      aCurrentPosition = m_ElevatorMotorL.getPosition();
-     SmartDashboard.putNumber("Wraist Position", aCurrentPosition.getValueAsDouble());
+     SmartDashboard.putNumber("Elevator Position", aCurrentPosition.getValueAsDouble());
   }
 
   //Call by the commands to move claw wraist to positions
