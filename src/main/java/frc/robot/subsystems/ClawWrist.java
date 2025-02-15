@@ -18,10 +18,11 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.CalibrationSettings;
 import frc.robot.Constants.ClawPositions;
 import frc.robot.Constants.ManipulatorConstants;
 
-public class ClawWraist extends SubsystemBase {
+public class ClawWrist extends SubsystemBase {
       /* Hardware */
       private final TalonFX m_ClawWraistMotor = new TalonFX(ManipulatorConstants.kIntakeWraistMotor, "rio");
       //Motion Magic
@@ -47,7 +48,7 @@ public class ClawWraist extends SubsystemBase {
       StatusSignal<Angle> aCurrentPosition;
 
   /** Creates a new ClawWraist. */
-  public ClawWraist() {
+  public ClawWrist() {
     TalonFXConfiguration configs = new TalonFXConfiguration();
     //Used for the homing of the mech (Enable if or when we use it!)
     //configs.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
@@ -61,18 +62,18 @@ public class ClawWraist extends SubsystemBase {
      * Motion Magic
     /* Configure current limits   */
     MotionMagicConfigs mm = configs.MotionMagic;
-    mm.MotionMagicCruiseVelocity = 6; // 5 rotations per second cruise
-    mm.MotionMagicAcceleration = 1.5; // Target acceleration of 400 rps/s (0.25 seconds to max)
-    mm.MotionMagicJerk = 50; // Target jerk of 4000 rps/s/s (0.1 seconds)
+    mm.MotionMagicCruiseVelocity = CalibrationSettings.WraistCalibrations.kCruiseVelocity;  // 5 rotations per second cruise
+    mm.MotionMagicAcceleration = CalibrationSettings.WraistCalibrations.kMaxAccelerationMotionMagic; // Target acceleration of 400 rps/s (0.25 seconds to max)
+    mm.MotionMagicJerk = CalibrationSettings.WraistCalibrations.kClawJerk; // Target jerk of 4000 rps/s/s (0.1 seconds)
 
     Slot0Configs slot0 = configs.Slot0;
     slot0.GravityType = GravityTypeValue.Arm_Cosine;
-    slot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-    slot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-    slot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
-    slot0.kP = 60;   // An error of 1 rps results in 0.11 V output
-    slot0.kI = 0;    // no output for integrated error
-    slot0.kD = 1;    // no output for error derivative
+    slot0.kS = CalibrationSettings.WraistCalibrations.kClawkS;   // Add 0.25 V output to overcome static friction
+    slot0.kV = CalibrationSettings.WraistCalibrations.kClawkV;   // A velocity target of 1 rps results in 0.12 V output
+    slot0.kA = CalibrationSettings.WraistCalibrations.kClawkA;   // An acceleration of 1 rps/s requires 0.01 V output
+    slot0.kP = CalibrationSettings.WraistCalibrations.kClawkP;   // An error of 1 rps results in 0.11 V output
+    slot0.kI = CalibrationSettings.WraistCalibrations.kClawkI;   // no output for integrated error
+    slot0.kD = CalibrationSettings.WraistCalibrations.kClawkD;   // no output for error derivative
     
     FeedbackConfigs fdb = configs.Feedback;
     fdb.SensorToMechanismRatio = 100;

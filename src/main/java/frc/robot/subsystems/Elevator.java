@@ -1,6 +1,9 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+/* FRC8516 Wired
+ * Reefscape Dive Season
+ * Subsystem Elevator Logic
+ *  -Using to Falcon 500
+ *  -Master / Slave running Motion Magic
+ */
 
 package frc.robot.subsystems;
 
@@ -10,6 +13,7 @@ import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -18,10 +22,12 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.CalibrationSettings;
+import frc.robot.Constants;
 import frc.robot.Constants.ElevatorPositions;
 import frc.robot.Constants.ManipulatorConstants;
 
-public class Elvator extends SubsystemBase {
+public class Elevator extends SubsystemBase {
   /* Hardware */
   	private final TalonFX m_ElevatorMotorL = new TalonFX(ManipulatorConstants.kElevatorMotorLeft, "rio");
     private final TalonFX m_ElevatorMotorR = new TalonFX(ManipulatorConstants.kElevatorMotorRight, "rio");
@@ -50,9 +56,13 @@ public class Elvator extends SubsystemBase {
       private double scale = 360;
       //local variable to keep track of position
       StatusSignal<Angle> aCurrentPosition;
+      // Creates two followers for running the motors in sync.
+     // private final Follower m_follower;
+      private final Follower m_followerInv;
+
 
   /** Creates a new Elvator. */
-  public Elvator() {
+  public Elevator() {
     TalonFXConfiguration configs = new TalonFXConfiguration();
         //Used for the homing of the mech (Enable if or when we use it!)
     //configs.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
@@ -61,23 +71,24 @@ public class Elvator extends SubsystemBase {
     
     //Software limits - forward motion
     configs.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
-    configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 180;  // *Need to check!!!
+    configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 20;  // *Need to check!!!
     /** *********************************************************************************************
      * Motion Magic
     /* Configure current limits   */
     MotionMagicConfigs mm = configs.MotionMagic;
-    mm.MotionMagicCruiseVelocity = 6; // 5 rotations per second cruise
-    mm.MotionMagicAcceleration = 1.5; // Target acceleration of 400 rps/s (0.25 seconds to max)
-    mm.MotionMagicJerk = 50; // Target jerk of 4000 rps/s/s (0.1 seconds)
+    mm.MotionMagicCruiseVelocity = CalibrationSettings.ElevatorCalibrations.kCruiseVelocity;    // 5 rotations per second cruise
+    mm.MotionMagicAcceleration = CalibrationSettings.ElevatorCalibrations.kMaxAccelerationMotionMagic; // Target acceleration of 400 rps/s (0.25 seconds to max)
+    mm.MotionMagicJerk = CalibrationSettings.ElevatorCalibrations.kElevatorJerk;     // Target jerk of 4000 rps/s/s (0.1 seconds)
 
+    // Feedforward and PID settings for the motors in this subsystem.
     Slot0Configs slot0 = configs.Slot0;
     slot0.GravityType = GravityTypeValue.Elevator_Static;
-    slot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-    slot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-    slot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
-    slot0.kP = 60;   // An error of 1 rps results in 0.11 V output
-    slot0.kI = 0;    // no output for integrated error
-    slot0.kD = 1;    // no output for error derivative
+    slot0.kS = CalibrationSettings.ElevatorCalibrations.kElevatorkS;   // Add 0.25 V output to overcome static friction
+    slot0.kV = CalibrationSettings.ElevatorCalibrations.kElevatorkV;   // A velocity target of 1 rps results in 0.12 V output
+    slot0.kA = CalibrationSettings.ElevatorCalibrations.kElevatorkA;   // An acceleration of 1 rps/s requires 0.01 V output
+    slot0.kP = CalibrationSettings.ElevatorCalibrations.kElevatorkP;   // An error of 1 rps results in 0.11 V output
+    slot0.kI = CalibrationSettings.ElevatorCalibrations.kElevatorkI;   // no output for integrated error
+    slot0.kD = CalibrationSettings.ElevatorCalibrations.kElevatorkD;   // no output for error derivative
     
     FeedbackConfigs fdb = configs.Feedback;
     fdb.SensorToMechanismRatio = 16;  //16:1 Gearbox
@@ -87,10 +98,13 @@ public class Elvator extends SubsystemBase {
     //Set Brake mode
     m_ElevatorMotorL.setControl(m_brake);
     m_ElevatorMotorR.setControl(m_brake);
-    /* Setup Master/Slave Relation */
-    //m_ElevatorMotorR.setControl(m_ElevatorMotorL.)
+    // Declares elevator1 as lead motor. Other motors are set to follow.
+    //m_follower = new Follower(Constants.ManipulatorConstants.kElevatorMotorLeft, false);
+    m_followerInv = new Follower(Constants.ManipulatorConstants.kElevatorMotorLeft, true);
+    /* Setup Master/Slave Relation */ // *Need to check direction first
+    m_ElevatorMotorR.setControl(m_followerInv);
 
-    /* Retry config apply up to 5 times, report if failure */
+    /* Retry config apply up to 5 times, report if failure -Motor left (Master) */
     StatusCode status = StatusCode.StatusCodeNotInitialized;
     for (int i = 0; i < 5; ++i) {
       status = m_ElevatorMotorL.getConfigurator().apply(configs);
@@ -99,6 +113,17 @@ public class Elvator extends SubsystemBase {
     if(!status.isOK()) {
       System.out.println("Could not apply configs, error code: " + status.toString());
     }
+
+    /* Retry config apply up to 5 times, report if failure -Motor right (Slave) */
+    StatusCode status2 = StatusCode.StatusCodeNotInitialized;
+    for (int i = 0; i < 5; ++i) {
+      status2 = m_ElevatorMotorR.getConfigurator().apply(configs);
+      if (status2.isOK()) break;
+    }
+    if(!status2.isOK()) {
+      System.out.println("Could not apply configs, error code: " + status2.toString());
+    }
+
   }
 
   @Override
