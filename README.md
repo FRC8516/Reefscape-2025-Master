@@ -1,4 +1,4 @@
-# REEFSCAPE v2025.1
+# REEFSCAPE v2025.3
 
 FRC 8516 Wired Up
 
@@ -11,9 +11,10 @@ Actuators: Falcon 500, using Pigeon 2.
 -Motion Magic for routines for intake and shooter positions.
 
 ## Prerequisites
-* WPI 2025.2.1
+* WPI 2025.3.1
 * Phoenix 6 v25.3.1 - Adds features that are required for swerve
 * Phoenix 6 v25.3.1 -- Includes APIs for firmware features ^Changed to Phoenix 6 api
+* Pathplanner v25.2.3
 
 ## Configuration
 
