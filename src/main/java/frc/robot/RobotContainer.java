@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import frc.robot.Commands.CoralScoringPositions;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
@@ -43,9 +44,16 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     public final ClawIntake m_ClawIntake = new ClawIntake();
-    public final ClawWrist m_ClawWraist = new ClawWrist();
+    public final ClawWrist m_ClawWrist = new ClawWrist();
     public final Elevator m_elevator = new Elevator();
     
+    private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1" );
+    private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2" );
+    private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3" );
+    @SuppressWarnings("unused")
+    private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4" );
+    private final CoralScoringPositions m_LoadingPosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading" );
+    private final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home" );
     public RobotContainer() {
         autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
@@ -77,21 +85,19 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-        //elevator buttons
-        operator.leftTrigger().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("HomePosition")));
-        operator.leftBumper().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("LoadingPosition")));
-        operator.povUp().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L1Position")));
-        operator.povRight().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L2Position")));
-        operator.povDown().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L3Position")));
-        operator.povLeft().onTrue(m_elevator.runOnce(() -> m_elevator.MoveElevatorToPosition("L4Position")));
 
-        //Claw Buttons
-        operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
-        operator.rightBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
-        operator.y().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("HomePosition")));
-        operator.x().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("ScoringPosition")));
-        operator.a().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("TransferPostion")));
-        operator.b().onTrue(m_ClawWraist.runOnce(() -> m_ClawWraist.MoveClawToPosition("LoadingPosition")));
+                                    //Operator Buttons below
+        
+        operator.y().onTrue(m_HomePosistion);
+        operator.b().onTrue(m_LoadingPosistion);
+        //POV is the D-Pad
+        operator.povUp().onTrue(m_ScoringPositionL1);
+        operator.povRight().onTrue(m_ScoringPositionL2);
+        operator.povDown().onTrue(m_ScoringPositionL3);
+        //operator.povLeft().onTrue(m_ScoringPositionL4);  //Uncomment when elevator reaches L4 and Claw and Turn to L4
+        operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
+        operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
+    
         
         drivetrain.registerTelemetry(logger::telemeterize);
     }

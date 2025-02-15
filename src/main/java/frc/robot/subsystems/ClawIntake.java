@@ -39,8 +39,8 @@ public class ClawIntake extends SubsystemBase {
 
   public void Intake(){
     m_timer.start();
-      while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
-        m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
+    while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
+      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
       if(isCoralDetected() == true){
         break;
       }
@@ -51,12 +51,12 @@ public class ClawIntake extends SubsystemBase {
 
   public void Output(){
     m_timer.start();
-      while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
-        m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
-        if(isCoralDetected() == true){
-          break;
-        }
+    while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
+      m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
+      if(isCoralDetected() == false){
+        break;
       }
+    }
     m_timer.stop();
     m_timer.reset();
   }

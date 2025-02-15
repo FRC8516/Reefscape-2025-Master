@@ -182,7 +182,7 @@ public class Elevator extends SubsystemBase {
   }
 
   //This checks Current positon to setpoint for the commands calls - isFinished flag
-  public Boolean isClawWraistInPosition() {
+  public Boolean isElevatorInPosition() {
    double dError = aCurrentPosition.getValueAsDouble() - setPoint;
    //Returns the check to see if the elevator is in position
    if ((dError < 0.5) || (dError > -0.5)) {

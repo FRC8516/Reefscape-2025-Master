@@ -17,14 +17,45 @@ import frc.robot.subsystems.Elevator;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class CoralScoringPositions extends SequentialCommandGroup {
   /** Creates a new CoralScoringPositions. */
-  public CoralScoringPositions(ClawWrist mClawWrist, Elevator mElevator) {
+  public CoralScoringPositions(ClawWrist mClawWrist, Elevator mElevator, String Position) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
-      new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position)
-    );
+    if (Position == "L1") {
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position),
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
+      );
+    } else if (Position == "L2"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position),
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
+      );
+    } else if (Position == "L3"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position),
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
+      );
+    } else if (Position == "L4"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L4Position),
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
+      );
+    } else if (Position == "Loading"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition),
+        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingStationPosition)
+      );
+    } else if (Position == "Home"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition),
+        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition)
+      );
+    } 
   }
-
-
 }
