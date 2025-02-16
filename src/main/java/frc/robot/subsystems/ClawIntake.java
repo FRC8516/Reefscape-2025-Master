@@ -19,7 +19,7 @@ public class ClawIntake extends SubsystemBase {
   /* Hardware */
     private final TalonFX m_ClawIntake = new TalonFX(ManipulatorConstants.kIntakeMotor, "rio");
     private final CANrange m_CoralDetection = new CANrange(OIConstants.CANRangeID, "rio");
-    private Timer m_timer;
+    private Timer m_timer = new Timer();
     
   /** Creates a new ClawIntake. */
   public ClawIntake() {
@@ -39,24 +39,20 @@ public class ClawIntake extends SubsystemBase {
 
   public void Intake(){
     m_timer.start();
-    while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
-      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
-      if(isCoralDetected() == true){
-        break;
-      }
+    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true || isCoralDetected() == true){
+      m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
     }
+    StopMotion();
     m_timer.stop();
     m_timer.reset();
   }
 
   public void Output(){
     m_timer.start();
-    while(m_timer.get() < ManipulatorConstants.kIntakeFeedTime){
-      m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
-      if(isCoralDetected() == false){
-        break;
-      }
+    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true|| isCoralDetected() == false){
+      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
     }
+    StopMotion();
     m_timer.stop();
     m_timer.reset();
   }

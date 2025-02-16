@@ -23,7 +23,7 @@ public final class Constants {
         public static final double kDriveDeadband = 0.15;  //@0.05
         public static final int CANdleID = 27;
         public static final int CANRangeID = 21;
-        public static final double CANRangeDetectRange = 3.5; //Set to half total distance from the top of coral chute
+        public static final double CANRangeDetectRange = 0.1; //Set to half total distance from the top of coral chute
     }
 
       public static final class ManipulatorConstants {
@@ -37,7 +37,7 @@ public final class Constants {
         //Intake feed time
         public static final double kIntakeFeedTime = 6.0;
         //Intake Speed in voltage
-        public static final double kIntakeVoltage = 5.5;
+        public static final double kIntakeVoltage = 3.5;
         //Position Intake Wraist time out
         public static final double kIntakeWraistTime = 0.10;
         //Shooter Wraist time out
