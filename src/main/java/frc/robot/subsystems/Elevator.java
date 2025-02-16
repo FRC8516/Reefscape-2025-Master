@@ -18,6 +18,8 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
+
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -72,6 +74,7 @@ public class Elevator extends SubsystemBase {
     //Software limits - forward motion
     configs.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 20;  // *Need to check!!!
+    configs.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     /** *********************************************************************************************
      * Motion Magic
     /* Configure current limits   */

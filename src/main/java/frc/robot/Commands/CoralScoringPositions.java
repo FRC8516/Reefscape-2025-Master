@@ -18,8 +18,6 @@ import frc.robot.subsystems.Elevator;
 public class CoralScoringPositions extends SequentialCommandGroup {
   /** Creates a new CoralScoringPositions. */
   public CoralScoringPositions(ClawWrist mClawWrist, Elevator mElevator, String Position) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
     if (Position == "L1") {
       addCommands(
         new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
