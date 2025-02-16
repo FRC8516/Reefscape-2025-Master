@@ -49,7 +49,7 @@ public class ClawIntake extends SubsystemBase {
 
   public void Output(){
     m_timer.start();
-    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true|| isCoralDetected() == false){
+    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true){
       m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
     }
     StopMotion();

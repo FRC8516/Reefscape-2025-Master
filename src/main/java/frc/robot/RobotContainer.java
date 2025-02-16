@@ -94,7 +94,6 @@ public class RobotContainer {
         operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
         operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
     
-        
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 

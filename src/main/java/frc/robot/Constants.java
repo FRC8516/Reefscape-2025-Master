@@ -35,7 +35,7 @@ public final class Constants {
         public static final int kElevatorMotorLeft = 22;
         public static final int kElevatorMotorRight = 23;
         //Intake feed time
-        public static final double kIntakeFeedTime = 6.0;
+        public static final double kIntakeFeedTime = 3.0;
         //Intake Speed in voltage
         public static final double kIntakeVoltage = 3.5;
         //Position Intake Wraist time out
