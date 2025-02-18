@@ -11,11 +11,13 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Commands.CoralScoringPositions;
+import frc.robot.Constants.OIConstants;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
@@ -51,6 +53,14 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4" );
     private final CoralScoringPositions m_LoadingPosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading" );
     private final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home" );
+    private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
+    private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
+    private final CoralScoringPositions m_testingScoring = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawScoring");
+    private final CoralScoringPositions m_testingLoading = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawLoading");
+    private final CoralScoringPositions m_testingElevHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevHome");
+    private final CoralScoringPositions m_testingElevTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevTransfer");
+    private final CoralScoringPositions m_testingElevScoring = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevScoring");
+    private final CoralScoringPositions m_testingElevLoading = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevLoading");
     public RobotContainer() {
         //autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
@@ -63,14 +73,14 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-MathUtil.applyDeadband(joystick.getLeftY(), OIConstants.kDriveDeadband) * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-MathUtil.applyDeadband(joystick.getLeftX(), OIConstants.kDriveDeadband) * MaxSpeed) // Drive left with negative X (left)
+                    .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
+            point.withModuleDirection(new Rotation2d(-MathUtil.applyDeadband(joystick.getLeftY(), OIConstants.kDriveDeadband), -MathUtil.applyDeadband(joystick.getLeftX(), OIConstants.kDriveDeadband)))
         ));
 
         // Run SysId routines when holding back/start and X/Y.
@@ -83,14 +93,22 @@ public class RobotContainer {
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
-        //Operator Buttons below
-        operator.y().onTrue(m_HomePosistion);
-        operator.b().onTrue(m_LoadingPosistion);
+        //Operator Buttons below\
+        operator.a().onTrue(m_testingHome);
+        operator.b().onTrue(m_testingTransfer);
+        operator.y().onTrue(m_testingScoring);
+        operator.x().onTrue(m_testingLoading);
+        operator.a().and(operator.leftBumper()).onTrue(m_testingHome);
+        operator.b().and(operator.leftBumper()).onTrue(m_testingTransfer);
+        operator.y().and(operator.leftBumper()).onTrue(m_testingScoring);
+        operator.x().and(operator.leftBumper()).onTrue(m_testingLoading);
+        /* For safety leave commented out during testing
         //POV is the D-Pad
         operator.povUp().onTrue(m_ScoringPositionL1);
         operator.povRight().onTrue(m_ScoringPositionL2);
         operator.povDown().onTrue(m_ScoringPositionL3);
         //operator.povLeft().onTrue(m_ScoringPositionL4);  //Uncomment when elevator reaches L4
+        */
         operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
         operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
     
