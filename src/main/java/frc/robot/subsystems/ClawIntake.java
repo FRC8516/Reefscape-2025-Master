@@ -20,13 +20,16 @@ public class ClawIntake extends SubsystemBase {
     private final TalonFX m_ClawIntake = new TalonFX(ManipulatorConstants.kIntakeMotor, "rio");
     private final CANrange m_CoralDetection = new CANrange(OIConstants.CANRangeID, "rio");
     private Timer m_timer = new Timer();
+    private boolean isCoralDetected = false;
+    private boolean isAfterDetectionRunning = false;
+    private boolean isCommandDone = true;
     
   /** Creates a new ClawIntake. */
   public ClawIntake() {
     /* Factory default hardware to prevent unexpected behavior */
     TalonFXConfiguration configs = new TalonFXConfiguration();
       //Set configurations  
-    configs.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     configs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     m_ClawIntake.getConfigurator().apply(configs);
   }
@@ -34,39 +37,52 @@ public class ClawIntake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Coral Detected?", isCoralDetected());
+        
+    if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
+      isCoralDetected = true;
+      isAfterDetectionRunning = true;
+      AfterDetection(); 
+    } else{
+      isCoralDetected = false;
+      isAfterDetectionRunning  = false;
+    }
+    
+    SmartDashboard.putBoolean("Coral Detected?", isCoralDetected);
+
   }
 
   public void Intake(){
-    m_timer.start();
-    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true || isCoralDetected() == true){
-      m_ClawIntake.setVoltage(-ManipulatorConstants.kIntakeVoltage);
+    isCommandDone = false;
+    if (isCoralDetected == false && isAfterDetectionRunning == false) {
+      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
     }
-    StopMotion();
-    m_timer.stop();
-    m_timer.reset();
   }
 
   public void Output(){
     m_timer.start();
     while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true){
-      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage);
+      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
     }
     StopMotion();
     m_timer.stop();
     m_timer.reset();
   }
 
-  public void StopMotion(){
-    m_ClawIntake.stopMotor();
+  private void AfterDetection() {
+    if (isCommandDone == false){
+      m_timer.start();
+      while((m_timer.get() < 0.25) == true){
+        m_ClawIntake.setVoltage(2.0);
+      }
+      isCommandDone = true;
+      StopMotion();
+      m_timer.stop();
+      m_timer.reset();
+    }
   }
 
-  public boolean isCoralDetected(){
-    if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
-      return true;
-    } else{
-      return false;
-    }
+  public void StopMotion(){
+    m_ClawIntake.stopMotor();
   }
 
 }

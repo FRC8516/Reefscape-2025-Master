@@ -14,7 +14,6 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
-
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,10 +28,10 @@ public class ClawWrist extends SubsystemBase {
       //Motion Magic
       private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
       //backup key values not returned from perference table on shuffleboard....100:1 Gear box
-      final double ClawPositionHome = 0.1;
-      final double ClawPositionTransfer = 5;
-      final double ClawPositionLoading = 10;
-      final double ClawPositionScoring = 20;
+      final double ClawPositionHome = 0.05;
+      final double ClawPositionTransfer = 0.1;
+      final double ClawPositionLoading = 0.2;
+      final double ClawPositionScoring = 0.3;
       //Use to get from the preference table (Key value)
       final String ClawHomeKey = "Claw Home Position";
       final String ClawScoringKey = "Claw Scoring Position";

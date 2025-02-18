@@ -54,6 +54,18 @@ public class CoralScoringPositions extends SequentialCommandGroup {
         new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition),
         new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition)
       );
-    } 
+    } else if (Position == "clawHome"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition)
+      );
+    } else if (Position == "clawTransfer"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition)
+      );
+    } else if (Position == "clawScoring"){
+      addCommands(
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
+      );
+    }
   }
 }
