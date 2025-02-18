@@ -78,13 +78,17 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       addCommands(
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position)
       );
-    } else if (Position == "ElevScoring"){
+    } else if (Position == "ElevL1"){
       addCommands(
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position)
       );
     } else if (Position == "ElevLoading"){
       addCommands(
         new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition)
+      );
+    }else if (Position == "ElevL3"){
+      addCommands(
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position)
       );
     }
   }
