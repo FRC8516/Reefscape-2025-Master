@@ -59,8 +59,11 @@ public class RobotContainer {
     private final CoralScoringPositions m_testingLoading = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawLoading");
     private final CoralScoringPositions m_testingElevHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevHome");
     private final CoralScoringPositions m_testingElevTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevTransfer");
-    private final CoralScoringPositions m_testingElevScoring = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevScoring");
+    private final CoralScoringPositions m_testingElevL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL1");
     private final CoralScoringPositions m_testingElevLoading = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevLoading");
+    private final CoralScoringPositions m_testingElevL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL2");
+    private final CoralScoringPositions m_testingElevL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL3");
+
     public RobotContainer() {
         //autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
@@ -98,10 +101,10 @@ public class RobotContainer {
         operator.b().onTrue(m_testingTransfer);
         operator.y().onTrue(m_testingScoring);
         operator.x().onTrue(m_testingLoading);
-        operator.a().and(operator.leftBumper()).onTrue(m_testingHome);
-        operator.b().and(operator.leftBumper()).onTrue(m_testingTransfer);
-        operator.y().and(operator.leftBumper()).onTrue(m_testingScoring);
-        operator.x().and(operator.leftBumper()).onTrue(m_testingLoading);
+        operator.a().and(operator.leftBumper()).onTrue(m_testingElevHome);
+        operator.b().and(operator.leftBumper()).onTrue(m_testingElevLoading);
+        operator.y().and(operator.leftBumper()).onTrue(m_testingElevL1);
+        operator.x().and(operator.leftBumper()).onTrue(m_testingElevL3);
         /* For safety leave commented out during testing
         //POV is the D-Pad
         operator.povUp().onTrue(m_ScoringPositionL1);
