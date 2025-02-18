@@ -24,6 +24,7 @@ public class CalibrationSettings {
         public static final double kCruiseVelocity = 6;
         public static final double kMaxAccelerationMotionMagic = 1.5;
         public static final double kElevatorJerk = 50;
+        public static final double kMaxLimit = 67.0;
     }
 
     public static class WraistCalibrations {
@@ -41,6 +42,7 @@ public class CalibrationSettings {
         public static final double kCruiseVelocity = 6;
         public static final double kMaxAccelerationMotionMagic = 1.5;
         public static final double kClawJerk = 50;
+        public static final double kMaxLimit = 37;  //rotations for max travel
     }
 
     public static class ClimberCalibrations {
