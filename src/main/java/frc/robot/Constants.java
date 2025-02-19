@@ -62,6 +62,7 @@ public final class Constants {
         public static final String ScoringPosition = "ScoringPosition";
         public static final String TransferPosition = "TransferPostion";
         public static final String LoadingStationPosition = "LoadingPosition";
+        public static final String AlgaePosition = "AlgaePositon";
     }
 
     //Elevator Positions

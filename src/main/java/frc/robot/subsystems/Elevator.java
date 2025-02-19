@@ -35,10 +35,10 @@ public class Elevator extends SubsystemBase {
     private final TalonFX m_ElevatorMotorR = new TalonFX(ManipulatorConstants.kElevatorMotorRight, "rio");
     //Motion Magic
     private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
-    //backup key values not returned from perference table on shuffleboard....100:1 Gear box
+    //backup key values not returned from perference table on shuffleboard....16:1 Gear box
       final double PositionHome = 0.1;
       final double PositionLoading = 10;
-      final double PositionL1 = 5;
+      final double PositionL1 = 240;
       final double PositionL2 = 10;
       final double PositionL3 = 15;
       final double PositionL4 = 20;
@@ -74,7 +74,7 @@ public class Elevator extends SubsystemBase {
     //Software limits - forward motion
     configs.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 20;  // *Need to check!!!
-    configs.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     /** *********************************************************************************************
      * Motion Magic
     /* Configure current limits   */

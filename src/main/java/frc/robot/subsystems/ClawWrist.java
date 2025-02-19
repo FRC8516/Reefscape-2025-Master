@@ -29,14 +29,16 @@ public class ClawWrist extends SubsystemBase {
       private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
       //backup key values not returned from perference table on shuffleboard....100:1 Gear box
       final double ClawPositionHome = 0.05;
-      final double ClawPositionTransfer = 0.1;
+      final double ClawPositionTransfer = 50.0;
       final double ClawPositionLoading = 0.2;
-      final double ClawPositionScoring = 0.3;
+      final double ClawPositionScoring = 30.0;
+      final double ClawPositionAlgae = 120.0;
       //Use to get from the preference table (Key value)
       final String ClawHomeKey = "Claw Home Position";
       final String ClawScoringKey = "Claw Scoring Position";
       final String ClawTransferKey = "Claw Transfer Postion";
       final String ClawLoadingKey = "ClawLoadingPosition";
+      final String ClawAlgaeKey = "Claw Algae Key";
       //local setpoint for moving to position by magic motion
       private double setPoint;
       private double backUp;
@@ -117,6 +119,11 @@ public class ClawWrist extends SubsystemBase {
         //Move to home position
         backUp = ClawPositionHome;
         Key = ClawHomeKey;
+        break;
+      case ClawPositions.AlgaePosition:;
+        //move to Algae Pick Position
+        backUp = ClawPositionAlgae;
+        Key = ClawAlgaeKey;
         break;
     }
     //gets the current value

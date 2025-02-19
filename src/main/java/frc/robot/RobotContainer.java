@@ -101,10 +101,10 @@ public class RobotContainer {
         operator.b().onTrue(m_testingTransfer);
         operator.y().onTrue(m_testingScoring);
         operator.x().onTrue(m_testingLoading);
-        operator.a().and(operator.leftBumper()).onTrue(m_testingElevHome);
-        operator.b().and(operator.leftBumper()).onTrue(m_testingElevLoading);
-        operator.y().and(operator.leftBumper()).onTrue(m_testingElevL1);
-        operator.x().and(operator.leftBumper()).onTrue(m_testingElevL3);
+        operator.povDown().onTrue(m_testingElevHome);
+        operator.povLeft().onTrue(m_testingElevL1);
+        operator.povUp().onTrue(m_testingElevL2);
+        operator.povRight().onTrue(m_testingElevL3);
         /* For safety leave commented out during testing
         //POV is the D-Pad
         operator.povUp().onTrue(m_ScoringPositionL1);
