@@ -36,15 +36,13 @@ public class Elevator extends SubsystemBase {
     //Motion Magic
     private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
     //backup key values not returned from perference table on shuffleboard....16:1 Gear box
-      final double PositionHome = 0.1;
-      final double PositionLoading = 10;
-      final double PositionL1 = 240;
-      final double PositionL2 = 10;
-      final double PositionL3 = 15;
-      final double PositionL4 = 20;
+      final double PositionHome = 0.15;
+      final double PositionL1 = 240.0;
+      final double PositionL2 = 800.0;
+      final double PositionL3 = 1750.0;
+      final double PositionL4 = 2000.0;
       //Use to get from the preference table (Key value)
       final String HomeKey = "Elevator Home Pos";
-      final String LoadingKey = "Elevator Loading";
       final String L1Key = "L1 Position";
       final String L2Key = "L2 Position";
       final String L3Key = "L3 Position";
@@ -145,11 +143,6 @@ public class Elevator extends SubsystemBase {
         // Home Position
         backUp = PositionHome;
         Key = HomeKey;
-        break;
-      case ElevatorPositions.LoadingPosition:;
-        // Loading Position
-        backUp = PositionLoading;
-        Key = LoadingKey;
         break;
       case ElevatorPositions.L1Position:;
         // L1 position

@@ -80,7 +80,24 @@ public class ClawIntake extends SubsystemBase {
       m_timer.reset();
     }
   }
-
+  public void IntakeAlgae(){
+    m_timer.start();
+    while((m_timer.get() < 3) == true){
+      m_ClawIntake.setVoltage(-3.0);
+    }
+    m_ClawIntake.setVoltage(-0.15);
+    m_timer.stop();
+    m_timer.reset();
+  }
+  public void OutputAlgae(){
+    m_timer.start();
+    while((m_timer.get() < 2.5) == true){
+      m_ClawIntake.setVoltage(10.0);
+    }
+    StopMotion(); 
+    m_timer.stop();
+    m_timer.reset();
+  }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }
