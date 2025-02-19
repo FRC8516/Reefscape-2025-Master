@@ -42,12 +42,6 @@ public class CoralScoringPositions extends SequentialCommandGroup {
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L4Position),
         new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
       );
-    } else if (Position == "Loading"){
-      addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition),
-        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingStationPosition)
-      );
     } else if (Position == "Home"){
       addCommands(
         new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition),
@@ -81,10 +75,6 @@ public class CoralScoringPositions extends SequentialCommandGroup {
     } else if (Position == "ElevL1"){
       addCommands(
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position)
-      );
-    } else if (Position == "ElevLoading"){
-      addCommands(
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition)
       );
     } else if (Position == "ElevL3"){
       addCommands(
