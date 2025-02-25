@@ -60,7 +60,7 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       addCommands(
         new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition)
       );
-    } else if (Position == "clawLoading"){
+    } else if (Position == "clawAglae"){
       addCommands(
         new MoveWristToPosition(mClawWrist, ClawPositions.AlgaePosition)
       );

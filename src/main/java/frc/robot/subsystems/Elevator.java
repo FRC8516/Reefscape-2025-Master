@@ -181,7 +181,7 @@ public class Elevator extends SubsystemBase {
   public Boolean isElevatorInPosition() {
    double dError = aCurrentPosition.getValueAsDouble() - setPoint;
    //Returns the check to see if the elevator is in position
-   if ((dError < 0.5) || (dError > -0.5)) {
+   if ((dError < 0.005) || (dError > -0.005)) {
      return true;
    } else {
      return false;

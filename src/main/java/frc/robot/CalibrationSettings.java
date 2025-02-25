@@ -34,7 +34,7 @@ public class CalibrationSettings {
         public static final double kClawkS = 0.25;
         public static final double kClawkV = 0.12;
         public static final double kClawkA = 0.01;
-        public static final double kClawkP = 35;
+        public static final double kClawkP = 50;
         public static final double kClawkD = 1;
         public static final double kClawkI = 0;
 

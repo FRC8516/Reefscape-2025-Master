@@ -14,13 +14,14 @@ public class MoveWristToPosition extends Command {
     private final ClawWrist m_ClawWrist;
     private final String m_NewPosition;
     private Timer m_timer;
-    boolean m_isdone;
+    boolean m_isdone = false;
 
   /** Creates a new MoveWristToPosition. */
   public MoveWristToPosition(ClawWrist m_PositionClawWrist, String whichPosition) {
     // Set local variables
     m_ClawWrist = m_PositionClawWrist;
     m_NewPosition = whichPosition;
+    m_isdone = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_ClawWrist);
   }

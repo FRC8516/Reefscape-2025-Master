@@ -29,6 +29,7 @@ public class ClawIntake extends SubsystemBase {
     /* Factory default hardware to prevent unexpected behavior */
     TalonFXConfiguration configs = new TalonFXConfiguration();
       //Set configurations  
+      
     configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     configs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     m_ClawIntake.getConfigurator().apply(configs);

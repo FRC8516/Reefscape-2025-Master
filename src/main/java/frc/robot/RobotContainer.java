@@ -62,8 +62,8 @@ public class RobotContainer {
             "clawTransfer");
     private final CoralScoringPositions m_testingScoring = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawScoring");
-    private final CoralScoringPositions m_testingLoading = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "clawLoading");
+    private final CoralScoringPositions m_testingAlgae= new CoralScoringPositions(m_ClawWrist, m_elevator,
+            "clawAlgae");
     private final CoralScoringPositions m_testingElevHome = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "ElevHome");
     private final CoralScoringPositions m_testingElevTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
@@ -113,11 +113,11 @@ public class RobotContainer {
         operator.a().onTrue(m_testingHome);
         operator.b().onTrue(m_testingTransfer);
         operator.y().onTrue(m_testingScoring);
-        operator.x().onTrue(m_testingLoading);
-        operator.povDown().onTrue(m_testingElevHome);
-        operator.povLeft().onTrue(m_testingElevL1);
-        operator.povUp().onTrue(m_testingElevL2);
-        operator.povRight().onTrue(m_testingElevL3);
+        operator.x().onTrue(m_testingAlgae);
+        operator.povDown().onTrue(m_HomePosistion);
+        operator.povLeft().onTrue(m_ScoringPositionL1);
+        operator.povUp().onTrue(m_ScoringPositionL2);
+        operator.povRight().onTrue(m_ScoringPositionL3);
         /*
          * For safety leave commented out during testing
          * //POV is the D-Pad

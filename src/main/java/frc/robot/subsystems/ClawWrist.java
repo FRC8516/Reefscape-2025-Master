@@ -14,6 +14,8 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
+
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,8 +58,9 @@ public class ClawWrist extends SubsystemBase {
     //configs.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
     //configs.HardwareLimitSwitch.ReverseLimitAutosetPositionEnable = true;
     //configs.HardwareLimitSwitch.ReverseLimitAutosetPositionValue = 0;
-    
+    m_ClawWraistMotor.setPosition(0);
     //Software limits - forward motion
+    configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     configs.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 180;  // *Need to check!!!
     /** *********************************************************************************************
@@ -141,7 +144,7 @@ public class ClawWrist extends SubsystemBase {
   public Boolean isClawWraistInPosition() {
    double dError = aCurrentPosition.getValueAsDouble() - setPoint;
    //Returns the check to see if the elevator is in position
-   if ((dError < 0.5) || (dError > -0.5)) {
+   if ((dError < 0.005) || (dError > -0.005)) {
      return true;
    } else {
      return false;
