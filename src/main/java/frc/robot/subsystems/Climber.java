@@ -53,7 +53,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     if (operator.back().getAsBoolean() == true){
-      m_ClimberMotor.setVoltage(MathUtil.applyDeadband(operator.getLeftY(), OIConstants.kDriveDeadband));
+      m_ClimberMotor.setVoltage(MathUtil.applyDeadband(operator.getRightY(), OIConstants.kDriveDeadband));
     }else{
       m_ClimberMotor.setVoltage(0);
     }
