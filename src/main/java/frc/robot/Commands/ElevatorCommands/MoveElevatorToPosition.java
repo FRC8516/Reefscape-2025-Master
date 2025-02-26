@@ -24,17 +24,18 @@ public class MoveElevatorToPosition extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Elevator.MoveElevatorToPosition(m_NewPosition);
     m_isdone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /* This checks to see if arm is position */
+    m_Elevator.MoveElevatorToPosition(m_NewPosition);
+    /* This checks to see if arm is position 
     if (m_Elevator.isElevatorInPosition() == true) {
       m_isdone = true;
     }
+    */
   }
 
   // Called once the command ends or is interrupted.
@@ -46,6 +47,6 @@ public class MoveElevatorToPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_isdone;
+    return false;
   }
 }

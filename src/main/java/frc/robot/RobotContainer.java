@@ -21,6 +21,7 @@ import frc.robot.Commands.CoralScoringPositions;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
 @SuppressWarnings("unused")
@@ -48,6 +49,7 @@ public class RobotContainer {
     public final ClawIntake m_ClawIntake = new ClawIntake();
     public final ClawWrist m_ClawWrist = new ClawWrist();
     public final Elevator m_elevator = new Elevator();
+    public final Climber m_Climber = new Climber();
 
     private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1");
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
@@ -62,7 +64,7 @@ public class RobotContainer {
             "clawTransfer");
     private final CoralScoringPositions m_testingScoring = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawScoring");
-    private final CoralScoringPositions m_testingAlgae= new CoralScoringPositions(m_ClawWrist, m_elevator,
+    private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
     private final CoralScoringPositions m_testingElevHome = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "ElevHome");
@@ -109,11 +111,13 @@ public class RobotContainer {
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
+        
         // Operator Buttons below\
         operator.a().onTrue(m_testingHome);
         operator.b().onTrue(m_testingTransfer);
         operator.y().onTrue(m_testingScoring);
         operator.x().onTrue(m_testingAlgae);
+
         operator.povDown().onTrue(m_HomePosistion);
         operator.povLeft().onTrue(m_ScoringPositionL1);
         operator.povUp().onTrue(m_ScoringPositionL2);
