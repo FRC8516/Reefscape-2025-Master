@@ -35,16 +35,14 @@ public class Elevator extends SubsystemBase {
     private final TalonFX m_ElevatorMotorR = new TalonFX(ManipulatorConstants.kElevatorMotorRight, "rio");
     //Motion Magic
     private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
-    //backup key values not returned from perference table on shuffleboard....100:1 Gear box
-      final double PositionHome = 0.1;
-      final double PositionLoading = 10;
-      final double PositionL1 = 5;
-      final double PositionL2 = 10;
-      final double PositionL3 = 15;
-      final double PositionL4 = 20;
+    //backup key values not returned from perference table on shuffleboard....16:1 Gear box
+      final double PositionHome = 0.15;
+      final double PositionL1 = 240.0;
+      final double PositionL2 = 800.0;
+      final double PositionL3 = 1750.0;
+      final double PositionL4 = 2000.0;
       //Use to get from the preference table (Key value)
       final String HomeKey = "Elevator Home Pos";
-      final String LoadingKey = "Elevator Loading";
       final String L1Key = "L1 Position";
       final String L2Key = "L2 Position";
       final String L3Key = "L3 Position";
@@ -74,7 +72,7 @@ public class Elevator extends SubsystemBase {
     //Software limits - forward motion
     configs.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     configs.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 20;  // *Need to check!!!
-    configs.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     /** *********************************************************************************************
      * Motion Magic
     /* Configure current limits   */
@@ -146,11 +144,6 @@ public class Elevator extends SubsystemBase {
         backUp = PositionHome;
         Key = HomeKey;
         break;
-      case ElevatorPositions.LoadingPosition:;
-        // Loading Position
-        backUp = PositionLoading;
-        Key = LoadingKey;
-        break;
       case ElevatorPositions.L1Position:;
         // L1 position
         backUp = PositionL1;
@@ -188,7 +181,7 @@ public class Elevator extends SubsystemBase {
   public Boolean isElevatorInPosition() {
    double dError = aCurrentPosition.getValueAsDouble() - setPoint;
    //Returns the check to see if the elevator is in position
-   if ((dError < 0.5) || (dError > -0.5)) {
+   if ((dError < 0.005) || (dError > -0.005)) {
      return true;
    } else {
      return false;

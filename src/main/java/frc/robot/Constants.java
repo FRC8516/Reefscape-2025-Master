@@ -55,19 +55,18 @@ public final class Constants {
         public static final String Green = "Green";
         public static final String Orange = "Orange";
     }
-
+    
     //Claw Positions 
     public static final class ClawPositions {
         public static final String HomePosition = "HomePosition";
         public static final String ScoringPosition = "ScoringPosition";
         public static final String TransferPosition = "TransferPostion";
-        public static final String LoadingStationPosition = "LoadingPosition";
+        public static final String AlgaePosition = "AlgaePositon";
     }
 
     //Elevator Positions
     public static final class ElevatorPositions {
         public static final String HomePosition = "HomePosition";
-        public static final String LoadingPosition = "LoadingPosition";
         public static final String L1Position = "L1Position";
         public static final String L2Position = "L2Position";
         public static final String L3Position = "L3Position";

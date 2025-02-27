@@ -16,7 +16,7 @@ public class CalibrationSettings {
         public static final double kElevatorkS = 0.25;
         public static final double kElevatorkV = 0.12;
         public static final double kElevatorkA = 0.01;
-        public static final double kElevatorkP = 60;
+        public static final double kElevatorkP = 15;
         public static final double kElevatorkD = 1;
         public static final double kElevatorkI = 0;
 
@@ -34,7 +34,7 @@ public class CalibrationSettings {
         public static final double kClawkS = 0.25;
         public static final double kClawkV = 0.12;
         public static final double kClawkA = 0.01;
-        public static final double kClawkP = 60;
+        public static final double kClawkP = 50;
         public static final double kClawkD = 1;
         public static final double kClawkI = 0;
 
@@ -42,7 +42,7 @@ public class CalibrationSettings {
         public static final double kCruiseVelocity = 6;
         public static final double kMaxAccelerationMotionMagic = 1.5;
         public static final double kClawJerk = 50;
-        public static final double kMaxLimit = 37;  //rotations for max travel
+        public static final double kMaxLimit = 32;  //rotations for max travel
     }
 
     public static class ClimberCalibrations {

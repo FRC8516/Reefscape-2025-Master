@@ -12,15 +12,20 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.CalibrationSettings;
+import frc.robot.Constants;
 import frc.robot.Constants.ManipulatorConstants;
+import frc.robot.Constants.OIConstants;
 
 public class Climber extends SubsystemBase {
   /* Hardware */
-    private final TalonFX m_ClimberMotor = new TalonFX(ManipulatorConstants.kClimberMotor, "rio");
-
-  /** Creates a new Climber. */
+    public final TalonFX m_ClimberMotor = new TalonFX(ManipulatorConstants.kClimberMotor, "rio");
+      /** Creates a new Climber. */
+    private final CommandXboxController operator = new CommandXboxController(
+            Constants.OIConstants.kOperatorControllerPort);
   public Climber() {
     TalonFXConfiguration configs = new TalonFXConfiguration();
     //Software limits - forward motion
@@ -42,15 +47,20 @@ public class Climber extends SubsystemBase {
     FeedbackConfigs fdb = configs.Feedback;
     fdb.SensorToMechanismRatio = 100;
     m_ClimberMotor.getConfigurator().apply(configs);
+    
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    if (operator.back().getAsBoolean() == true){
+      m_ClimberMotor.setVoltage(MathUtil.applyDeadband(operator.getRightY(), OIConstants.kDriveDeadband));
+    }else{
+      m_ClimberMotor.setVoltage(0);
+    }
+      // This method will be called once per scheduler run
   }
-
-  public void ExtendClimber () {
+  public void ExtendClimber (Double Controller) {
     
   }
-
+  
 }

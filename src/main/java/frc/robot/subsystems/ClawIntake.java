@@ -12,6 +12,8 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants;
 import frc.robot.Constants.ManipulatorConstants;
 import frc.robot.Constants.OIConstants;
 
@@ -23,12 +25,15 @@ public class ClawIntake extends SubsystemBase {
     private boolean isCoralDetected = false;
     private boolean isAfterDetectionRunning = false;
     private boolean isCommandDone = true;
-    
+    private final CommandXboxController operator = new CommandXboxController(
+            Constants.OIConstants.kOperatorControllerPort);
+            private boolean running = false;
   /** Creates a new ClawIntake. */
   public ClawIntake() {
     /* Factory default hardware to prevent unexpected behavior */
     TalonFXConfiguration configs = new TalonFXConfiguration();
       //Set configurations  
+      
     configs.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     configs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     m_ClawIntake.getConfigurator().apply(configs);
@@ -37,7 +42,13 @@ public class ClawIntake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-        
+        if (operator.start().getAsBoolean() == true){
+          m_ClawIntake.setVoltage(1.5);
+          running = true;
+        }else if (running == true){
+          m_ClawIntake.setVoltage(0);
+          running = false;
+        }
     if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
       isCoralDetected = true;
       isAfterDetectionRunning = true;
@@ -60,7 +71,7 @@ public class ClawIntake extends SubsystemBase {
 
   public void Output(){
     m_timer.start();
-    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime) == true){
+    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime/2) == true){
       m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
     }
     StopMotion();
@@ -80,7 +91,24 @@ public class ClawIntake extends SubsystemBase {
       m_timer.reset();
     }
   }
-
+  public void IntakeAlgae(){
+    m_timer.start();
+    while((m_timer.get() < 3) == true){
+      m_ClawIntake.setVoltage(-3.0);
+    }
+    m_ClawIntake.setVoltage(-0.15);
+    m_timer.stop();
+    m_timer.reset();
+  }
+  public void OutputAlgae(){
+    m_timer.start();
+    while((m_timer.get() < 2.5) == true){
+      m_ClawIntake.setVoltage(10.0);
+    }
+    StopMotion(); 
+    m_timer.stop();
+    m_timer.reset();
+  }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }
