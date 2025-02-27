@@ -42,6 +42,18 @@ public class ClawIntake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+      if (operator.leftTrigger().getAsBoolean() == true){
+        Intake();
+      }
+      if (operator.rightTrigger().getAsBoolean() == true){
+        Output();
+      }
+      if (operator.leftBumper().getAsBoolean() == true){
+        IntakeAlgae();
+      }
+      if (operator.rightBumper().getAsBoolean() == true){
+        OutputAlgae();
+      }
         if (operator.start().getAsBoolean() == true){
           m_ClawIntake.setVoltage(1.5);
           running = true;
@@ -93,7 +105,7 @@ public class ClawIntake extends SubsystemBase {
   }
   public void IntakeAlgae(){
     m_timer.start();
-    while((m_timer.get() < 3) == true){
+    while((m_timer.get() < 1.5) == true){
       m_ClawIntake.setVoltage(-3.0);
     }
     m_ClawIntake.setVoltage(-0.15);
@@ -102,7 +114,7 @@ public class ClawIntake extends SubsystemBase {
   }
   public void OutputAlgae(){
     m_timer.start();
-    while((m_timer.get() < 2.5) == true){
+    while((m_timer.get() < 1.5) == true){
       m_ClawIntake.setVoltage(10.0);
     }
     StopMotion(); 
