@@ -8,6 +8,8 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import java.time.Instant;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -60,8 +62,6 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
     @SuppressWarnings("unused")
     private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4");
-    private final CoralScoringPositions m_LoadingPosistion = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "Loading");
     private final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
@@ -70,9 +70,18 @@ public class RobotContainer {
             "clawScoring");
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
-    
+    private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
+    private final Command m_outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
+    private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
+
     public RobotContainer() {
-        NamedCommands.registerCommand("DriveOut", m_HomePosistion);
+        NamedCommands.registerCommand("Home", m_HomePosistion);
+        NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
+        NamedCommands.registerCommand("Scoring L2", m_ScoringPositionL2);
+        NamedCommands.registerCommand("Scoring L3", m_ScoringPositionL3);
+        NamedCommands.registerCommand("Intake", m_intake);
+        NamedCommands.registerCommand("Output", m_outake);
+        NamedCommands.registerCommand("StopMotors", m_Stop);
         m_autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
         SmartDashboard.putData("Auto Chooser", m_autoChooser);

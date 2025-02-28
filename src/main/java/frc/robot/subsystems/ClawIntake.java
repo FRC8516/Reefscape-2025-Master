@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import java.time.Instant;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANrange;
@@ -13,7 +12,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -105,7 +103,9 @@ public class ClawIntake extends SubsystemBase {
     m_timer.stop();
     m_timer.reset();
   }
- 
+  public void Output(){
+    m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
+  }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }
