@@ -21,8 +21,8 @@ public class CalibrationSettings {
         public static final double kElevatorkI = 0;
 
         // Motion Magic Configs for the MotionMagicConfigs class for the Elevator
-        public static final double kCruiseVelocity = 6;
-        public static final double kMaxAccelerationMotionMagic = 1.5;
+        public static final double kCruiseVelocity = 8.5;
+        public static final double kMaxAccelerationMotionMagic = 3.0;
         public static final double kElevatorJerk = 50;
         public static final double kMaxLimit = 67.0;
     }
@@ -39,7 +39,7 @@ public class CalibrationSettings {
         public static final double kClawkI = 0;
 
         // Motion Magic Configs for the MotionMagicConfigs class for the Claw
-        public static final double kCruiseVelocity = 6;
+        public static final double kCruiseVelocity = 7.0;
         public static final double kMaxAccelerationMotionMagic = 1.5;
         public static final double kClawJerk = 50;
         public static final double kMaxLimit = 32;  //rotations for max travel

@@ -35,12 +35,14 @@ public class ClawWrist extends SubsystemBase {
       final double ClawPositionLoading = 0.2;
       final double ClawPositionScoring = 30.0;
       final double ClawPositionAlgae = 120.0;
+      final double ClawPositionScoringAlgae = 155.0;
       //Use to get from the preference table (Key value)
       final String ClawHomeKey = "Claw Home Position";
       final String ClawScoringKey = "Claw Scoring Position";
       final String ClawTransferKey = "Claw Transfer Postion";
       final String ClawLoadingKey = "ClawLoadingPosition";
       final String ClawAlgaeKey = "Claw Algae Key";
+      final String ClawScoringAlgaeKey = "Claw Algae Scoring Key";
       //local setpoint for moving to position by magic motion
       private double setPoint;
       private double backUp;
@@ -127,6 +129,11 @@ public class ClawWrist extends SubsystemBase {
         //move to Algae Pick Position
         backUp = ClawPositionAlgae;
         Key = ClawAlgaeKey;
+        break;
+      case ClawPositions.AlgaeScoringPosition:;
+        //move to Algae Pick Position
+        backUp = ClawPositionScoringAlgae;
+        Key = ClawScoringAlgaeKey;
         break;
     }
     //gets the current value

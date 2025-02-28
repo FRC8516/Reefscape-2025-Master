@@ -62,7 +62,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
     @SuppressWarnings("unused")
     private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4");
-    private final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
+    public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawTransfer");
