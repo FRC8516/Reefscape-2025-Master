@@ -16,7 +16,7 @@ public class CalibrationSettings {
         public static final double kElevatorkS = 0.25;
         public static final double kElevatorkV = 0.12;
         public static final double kElevatorkA = 0.01;
-        public static final double kElevatorkP = 15;
+        public static final double kElevatorkP = 50;
         public static final double kElevatorkD = 1;
         public static final double kElevatorkI = 0;
 

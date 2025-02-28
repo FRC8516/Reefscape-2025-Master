@@ -11,13 +11,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Upper Right TO reef"
+                  "pathName": "Right hand side L1 coral"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Scoring L2"
+                  "name": "Scoring L1"
                 }
               }
             ]
@@ -31,6 +31,18 @@
                 "type": "named",
                 "data": {
                   "name": "Output"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopMotors"
                 }
               }
             ]
