@@ -187,6 +187,25 @@
           }
         },
         {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Lower Coral from Human player"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Scoring L3"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "sequential",
           "data": {
             "commands": [
@@ -209,31 +228,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Right Lower Coral from Human player"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L3"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Output"
           }
         }
       ]
