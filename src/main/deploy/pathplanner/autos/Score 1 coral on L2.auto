@@ -9,15 +9,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Go to reef"
+                  "name": "Scoring L2"
                 }
               },
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Scoring L3"
+                  "pathName": "score 1 Go to reef"
                 }
               }
             ]

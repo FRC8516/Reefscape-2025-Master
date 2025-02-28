@@ -106,6 +106,9 @@ public class ClawIntake extends SubsystemBase {
   public void Output(){
     m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
   }
+  public void OutputAlgae(){
+    m_ClawIntake.setVoltage(10.00);
+  }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }

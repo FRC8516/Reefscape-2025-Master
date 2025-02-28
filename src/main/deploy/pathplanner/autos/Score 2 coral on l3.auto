@@ -5,32 +5,50 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Go to reef"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L3"
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "sequential",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "Output"
+                  "name": "Scoring L2"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Algae"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Go to reef"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlgaeIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Yeet Algae To other Side"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlgaeOutput"
                 }
               },
               {
@@ -55,7 +73,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human player from Middle Coral"
+                  "pathName": "reef from Yeet Algae To other Side"
                 }
               },
               {
@@ -80,7 +98,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.5
+                  "waitTime": 1.25
                 }
               }
             ]
@@ -162,26 +180,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.5
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Right Lower Coral from Human player"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L3"
+                  "waitTime": 1.25
                 }
               }
             ]
@@ -210,6 +209,31 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Lower Coral from Human player"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Scoring L3"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Output"
           }
         }
       ]

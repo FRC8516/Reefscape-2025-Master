@@ -71,7 +71,9 @@ public class RobotContainer {
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
     private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
+    private final Command m_Algaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae());
     private final Command m_outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
+    private final Command m_Algaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
 
     public RobotContainer() {
@@ -79,8 +81,11 @@ public class RobotContainer {
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
         NamedCommands.registerCommand("Scoring L2", m_ScoringPositionL2);
         NamedCommands.registerCommand("Scoring L3", m_ScoringPositionL3);
+        NamedCommands.registerCommand("Algae", m_testingAlgae);
         NamedCommands.registerCommand("Intake", m_intake);
         NamedCommands.registerCommand("Output", m_outake);
+        NamedCommands.registerCommand("AlgaeIntake", m_Algaeintake);
+        NamedCommands.registerCommand("AlgaeOutput", m_Algaeoutake);
         NamedCommands.registerCommand("StopMotors", m_Stop);
         m_autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
