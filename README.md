@@ -14,7 +14,7 @@ Actuators: Falcon 500, using Pigeon 2.
 * WPI 2025.3.1
 * Phoenix 6 v25.3.1 - Adds features that are required for swerve
 * Phoenix 6 v25.3.1 -- Includes APIs for firmware features ^Changed to Phoenix 6 api
-* Pathplanner v25.2.3
+* Pathplanner v25.2.4
 
 ## Configuration
 
@@ -24,3 +24,5 @@ These values can be adjusted in the `Constants.java` file.
 Motor configuration is in the 'CalibrationSettings.java' file.
 
 ## Updated During Season
+
+-Added Autos, Fine tuning the motion during the LSR Event.
