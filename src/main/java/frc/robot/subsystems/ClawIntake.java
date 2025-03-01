@@ -99,7 +99,7 @@ public class ClawIntake extends SubsystemBase {
     while((m_timer.get() < 1.5) == true){
       m_ClawIntake.setVoltage(-3.0);
     }
-    m_ClawIntake.setVoltage(-0.15);
+    m_ClawIntake.setVoltage(-0.30);
     m_timer.stop();
     m_timer.reset();
   }
