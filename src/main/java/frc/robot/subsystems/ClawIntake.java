@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -27,8 +28,8 @@ public class ClawIntake extends SubsystemBase {
     private boolean isCommandDone = true;
     private final CommandXboxController operator = new CommandXboxController(
             Constants.OIConstants.kOperatorControllerPort);
-            private boolean running = false;
-  /** Creates a new ClawIntake. */
+    private boolean running = false;
+    /** Creates a new ClawIntake. */
   public ClawIntake() {
     /* Factory default hardware to prevent unexpected behavior */
     TalonFXConfiguration configs = new TalonFXConfiguration();
@@ -38,17 +39,33 @@ public class ClawIntake extends SubsystemBase {
     configs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     m_ClawIntake.getConfigurator().apply(configs);
   }
- 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    // This method will be called once per scheduler run  
+    if (operator.leftTrigger().getAsBoolean() == true){
+        Intake();
+      }
+      if (operator.leftBumper().getAsBoolean() == true){
+        IntakeAlgae();
+      }
         if (operator.start().getAsBoolean() == true){
           m_ClawIntake.setVoltage(1.5);
           running = true;
+        }else if (operator.rightTrigger().getAsBoolean() == true){
+          m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
+          running = true;
+        }else if  (operator.rightBumper().getAsBoolean() == true){
+          m_ClawIntake.setVoltage(10.0);
+          running = true;
+        }else if (operator.leftBumper().getAsBoolean() == true){
+          m_ClawIntake.setVoltage(-3.0);
+          running = false;
+          operator.leftBumper().onChange(null);
         }else if (running == true){
           m_ClawIntake.setVoltage(0);
           running = false;
         }
+
     if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
       isCoralDetected = true;
       isAfterDetectionRunning = true;
@@ -69,16 +86,6 @@ public class ClawIntake extends SubsystemBase {
     }
   }
 
-  public void Output(){
-    m_timer.start();
-    while((m_timer.get() < ManipulatorConstants.kIntakeFeedTime/2) == true){
-      m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
-    }
-    StopMotion();
-    m_timer.stop();
-    m_timer.reset();
-  }
-
   private void AfterDetection() {
     if (isCommandDone == false){
       m_timer.start();
@@ -91,26 +98,19 @@ public class ClawIntake extends SubsystemBase {
       m_timer.reset();
     }
   }
-  public void IntakeAlgae(){
-    m_timer.start();
-    while((m_timer.get() < 3) == true){
-      m_ClawIntake.setVoltage(-3.0);
-    }
-    m_ClawIntake.setVoltage(-0.15);
-    m_timer.stop();
-    m_timer.reset();
+  public void Output(){
+    m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
   }
   public void OutputAlgae(){
-    m_timer.start();
-    while((m_timer.get() < 2.5) == true){
-      m_ClawIntake.setVoltage(10.0);
-    }
-    StopMotion(); 
-    m_timer.stop();
-    m_timer.reset();
+    m_ClawIntake.setVoltage(10.00);
   }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }
-
+  public void IntakeAlgae(){
+    m_ClawIntake.setVoltage(-3.0);
+  }
+  public void IntakeAlgaeHold(){
+    m_ClawIntake.setVoltage(-0.30);
+  }
 }

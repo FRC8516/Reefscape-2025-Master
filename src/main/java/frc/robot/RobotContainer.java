@@ -8,11 +8,17 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import java.time.Instant;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -26,9 +32,9 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
 @SuppressWarnings("unused")
 public class RobotContainer {
-    // private final SendableChooser<Command> autoChooser;
+    private final SendableChooser<Command> m_autoChooser;
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second
+    private double MaxAngularRate = RotationsPerSecond.of(0.50).in(RadiansPerSecond); // 1/2 of a rotation per second
                                                                                       // max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */
@@ -56,9 +62,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
     @SuppressWarnings("unused")
     private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4");
-    private final CoralScoringPositions m_LoadingPosistion = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "Loading");
-    private final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
+    public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawTransfer");
@@ -66,20 +70,26 @@ public class RobotContainer {
             "clawScoring");
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
-    private final CoralScoringPositions m_testingElevHome = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "ElevHome");
-    private final CoralScoringPositions m_testingElevTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "ElevTransfer");
-    private final CoralScoringPositions m_testingElevL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL1");
-    private final CoralScoringPositions m_testingElevLoading = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "ElevLoading");
-    private final CoralScoringPositions m_testingElevL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL2");
-    private final CoralScoringPositions m_testingElevL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "ElevL3");
+    private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
+    private final Command m_Algaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae());
+    private final Command m_outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
+    private final Command m_Algaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae());
+    private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
 
     public RobotContainer() {
-        // autoChooser = AutoBuilder.buildAutoChooser();
+        NamedCommands.registerCommand("Home", m_HomePosistion);
+        NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
+        NamedCommands.registerCommand("Scoring L2", m_ScoringPositionL2);
+        NamedCommands.registerCommand("Scoring L3", m_ScoringPositionL3);
+        NamedCommands.registerCommand("Algae", m_testingAlgae);
+        NamedCommands.registerCommand("Intake", m_intake);
+        NamedCommands.registerCommand("Output", m_outake);
+        NamedCommands.registerCommand("AlgaeIntake", m_Algaeintake);
+        NamedCommands.registerCommand("AlgaeOutput", m_Algaeoutake);
+        NamedCommands.registerCommand("StopMotors", m_Stop);
+        m_autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
-        // SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Auto Chooser", m_autoChooser);
     }
 
     private void configureBindings() {
@@ -109,7 +119,7 @@ public class RobotContainer {
         joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // reset the field-centric heading on left bumper press
-        joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        joystick.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         
         // Operator Buttons below\
@@ -130,16 +140,16 @@ public class RobotContainer {
          * operator.povDown().onTrue(m_ScoringPositionL3);
          * //operator.povLeft().onTrue(m_ScoringPositionL4); //Uncomment when elevator
          * reaches L4
-         */
+         
         operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
         operator.leftBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae()));
         operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
         operator.rightBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae()));
-
+*/
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
     public Command getAutonomousCommand() {
-        return null;// autoChooser.getSelected();
+        return m_autoChooser.getSelected();
     }
 }
