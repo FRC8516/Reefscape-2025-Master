@@ -26,6 +26,7 @@ public class ClawIntake extends SubsystemBase {
     private boolean isCoralDetected = false;
     private boolean isAfterDetectionRunning = false;
     private boolean isCommandDone = true;
+    private boolean Algae = false;
     private final CommandXboxController operator = new CommandXboxController(
             Constants.OIConstants.kOperatorControllerPort);
     private boolean running = false;
@@ -60,10 +61,13 @@ public class ClawIntake extends SubsystemBase {
         }else if (operator.leftBumper().getAsBoolean() == true){
           m_ClawIntake.setVoltage(-3.0);
           running = false;
-          operator.leftBumper().onChange(null);
+          Algae = true;
         }else if (running == true){
           m_ClawIntake.setVoltage(0);
           running = false;
+          Algae = false;
+        }else if (Algae == true){
+          m_ClawIntake.setVoltage(-0.3);
         }
 
     if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
