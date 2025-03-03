@@ -20,22 +20,21 @@ public class CoralScoringPositions extends SequentialCommandGroup {
   public CoralScoringPositions(ClawWrist mClawWrist, Elevator mElevator, String Position) {
     if (Position == "L1") {
       addCommands(
- //       new MoveWristToPosition(mClawWr''ist, ClawPositions.TransferPosition).withTimeout(0.25),
-    new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.5),     
-    new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position).withTimeout(1.0)
-      
+      new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
+      new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position).withTimeout(0.75),
+      new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.80)  
       );
     } else if (Position == "L2"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5),
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.5)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(1.0)
       );
     } else if (Position == "L3"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5),
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
         new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.5)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(1.0)
       );
     } else if (Position == "L4"){
       addCommands(
@@ -45,9 +44,9 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       );
     } else if (Position == "Home"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5),
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(1.0),
         new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition).withTimeout(0.5)
+        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition).withTimeout(1.0)
       );
     } else if (Position == "clawHome"){
       addCommands(
@@ -64,22 +63,6 @@ public class CoralScoringPositions extends SequentialCommandGroup {
     } else if (Position == "clawAlgae"){
       addCommands(
         new MoveWristToPosition(mClawWrist, ClawPositions.AlgaePosition).withTimeout(0.5)
-      );
-    } else if (Position == "ElevHome"){
-      addCommands(
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition)
-      );
-    } else if (Position == "ElevL2"){
-      addCommands(
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position)
-      );
-    } else if (Position == "ElevL1"){
-      addCommands(
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position)
-      );
-    } else if (Position == "ElevL3"){
-      addCommands(
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position)
       );
     }
   }
