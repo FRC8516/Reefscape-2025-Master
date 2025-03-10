@@ -135,6 +135,10 @@ public class ClawWrist extends SubsystemBase {
         backUp = ClawPositionScoringAlgae;
         Key = ClawScoringAlgaeKey;
         break;
+      case ClawPositions.LoadingPosition:;
+        //Move to Coral Intake position
+        backUp = ClawPositionLoading;
+        Key = ClawLoadingKey;
     }
     //gets the current value
 	  setPoint = getPreferencesDouble(Key, backUp);

@@ -70,8 +70,9 @@ public class RobotContainer {
             "clawScoring");
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
-    private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
-    private final Command m_Algaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae());
+        private final CoralScoringPositions m_LoadingPosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading")
+        private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
+        private final Command m_Algaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae());
     private final Command m_outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
     private final Command m_Algaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
@@ -124,7 +125,8 @@ public class RobotContainer {
         
         // Operator Buttons below\
         operator.a().onTrue(m_testingHome);
-        operator.b().onTrue(m_testingTransfer);
+        operator.b().onTrue(m_)
+        //        operator.b().onTrue(m_testingTransfer);
         operator.y().onTrue(m_testingScoring);
         operator.x().onTrue(m_testingAlgae);
 
@@ -132,20 +134,8 @@ public class RobotContainer {
         operator.povLeft().onTrue(m_ScoringPositionL1);
         operator.povUp().onTrue(m_ScoringPositionL2);
         operator.povRight().onTrue(m_ScoringPositionL3);
-        /*
-         * For safety leave commented out during testing
-         * //POV is the D-Pad
-         * operator.povUp().onTrue(m_ScoringPositionL1);
-         * operator.povRight().onTrue(m_ScoringPositionL2);
-         * operator.povDown().onTrue(m_ScoringPositionL3);
-         * //operator.povLeft().onTrue(m_ScoringPositionL4); //Uncomment when elevator
-         * reaches L4
-         
-        operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
-        operator.leftBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae()));
-        operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
-        operator.rightBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae()));
-*/
+        
+
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
