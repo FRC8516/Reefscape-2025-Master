@@ -47,20 +47,8 @@ public class ClawIntake extends SubsystemBase {
     if (operator.leftTrigger().getAsBoolean() == true){
         Intake();
       }
-        if (operator.start().getAsBoolean() == true){
-          m_ClawIntake.setVoltage(1.5);
-          running = true;
-        }else if (operator.rightTrigger().getAsBoolean() == true){
-          m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
-          running = true;
-        }else if  (operator.rightBumper().getAsBoolean() == true){
-          m_ClawIntake.setVoltage(10.0);
-          running = true;
-        }else if (operator.leftBumper().getAsBoolean() == true){
-          m_ClawIntake.setVoltage(-3.0);
-          running = false;
-          Algae = true;
-        }else if (running == true){
+       
+        if (running == true){
           m_ClawIntake.setVoltage(0);
           running = false;
           Algae = false;
@@ -100,6 +88,24 @@ public class ClawIntake extends SubsystemBase {
       m_timer.reset();
     }
   }
+  public void Output(){
+    m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
+    running = true;
+  }
+  public void OutputAlgae(){
+    m_ClawIntake.setVoltage(10.00);
+    running = true;
+  }
+  public void inch(){
+    m_ClawIntake.setVoltage(1.5);
+    running = true;
+  }
+  public void intakeAlgae(){
+    m_ClawIntake.setVoltage(-3.0);
+    running = false;
+    Algae = true;
+  }
+ 
   public void AutoOutput(){
     m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
   }

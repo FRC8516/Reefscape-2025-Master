@@ -68,7 +68,12 @@ public class RobotContainer {
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
     private final CoralScoringPositions m_LoadingPosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading");
+    
     private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
+    private final Command m_Outake = m_ClawIntake.run(() -> m_ClawIntake.Output());
+    private final Command m_AlgaeIntake = m_ClawIntake.run(() -> m_ClawIntake.intakeAlgae());
+    private final Command m_AlgaeOutake = m_ClawIntake.run(() -> m_ClawIntake.OutputAlgae());
+    private final Command m_inch = m_ClawIntake.run(() -> m_ClawIntake.inch());
     private final Command m_autoAlgaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoIntakeAlgae());
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
@@ -135,6 +140,10 @@ public class RobotContainer {
         
         operator.leftTrigger().onTrue(m_intake);
         operator.rightTrigger().onTrue(m_Outake);
+        operator.leftBumper().onTrue(m_AlgaeIntake);
+        operator.rightBumper().onTrue(m_AlgaeOutake);
+
+        operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
