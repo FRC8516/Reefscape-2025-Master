@@ -8,40 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.867943037998762,
-        "y": 2.4794343587103556
+        "x": 4.282868961761956,
+        "y": 2.34093749757183
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.47525,
-        "y": 1.938499999999999
+        "x": 4.29975,
+        "y": 2.0457499999999995
       },
       "prevControl": {
-        "x": 4.225308833125879,
-        "y": 1.9330766153001608
-      },
-      "nextControl": {
-        "x": 5.2332409122867105,
-        "y": 1.9549473758673865
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.083,
-        "y": 4.766
-      },
-      "prevControl": {
-        "x": 7.770834995246659,
-        "y": 4.6523824042341815
+        "x": 3.938541561423183,
+        "y": 2.3241257356982286
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Algae Yeet"
     }
   ],
   "rotationTargets": [],
@@ -58,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -8.746162262555211
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

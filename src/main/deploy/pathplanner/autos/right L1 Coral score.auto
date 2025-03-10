@@ -47,6 +47,25 @@
               }
             ]
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Home From Right L1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Home"
+                }
+              }
+            ]
+          }
         }
       ]
     }

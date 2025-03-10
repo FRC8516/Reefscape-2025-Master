@@ -47,6 +47,25 @@
               }
             ]
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Home From mid reef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Home"
+                }
+              }
+            ]
+          }
         }
       ]
     }
