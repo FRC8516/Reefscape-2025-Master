@@ -166,6 +166,11 @@ public class Elevator extends SubsystemBase {
         backUp = PositionL4;
         Key = L4Key;
         break;
+      case ElevatorPositions.LoadingPosition:;
+        //Loading Position
+        backUp = PositionLoading;
+        Key = Loading;
+        break;
     }
 
     //gets the current value

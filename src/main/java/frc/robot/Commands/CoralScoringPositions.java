@@ -66,8 +66,9 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       );
     } else if (Position == "Loading"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingPosition).withTimeout(0.5),
-        new MoveElevatorToPosition(mElevator, ClawPositions.LoadingPosition).withTimeout(1)
+        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition).withTimeout(1),
+        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingPosition).withTimeout(0.5)      
       );
     }
   }

@@ -47,9 +47,6 @@ public class ClawIntake extends SubsystemBase {
     if (operator.leftTrigger().getAsBoolean() == true){
         Intake();
       }
-      if (operator.leftBumper().getAsBoolean() == true){
-        IntakeAlgae();
-      }
         if (operator.start().getAsBoolean() == true){
           m_ClawIntake.setVoltage(1.5);
           running = true;
@@ -103,19 +100,19 @@ public class ClawIntake extends SubsystemBase {
       m_timer.reset();
     }
   }
-  public void Output(){
+  public void AutoOutput(){
     m_ClawIntake.setVoltage(ManipulatorConstants.kIntakeVoltage/2);
   }
-  public void OutputAlgae(){
+  public void AutoOutputAlgae(){
     m_ClawIntake.setVoltage(10.00);
   }
   public void StopMotion(){
     m_ClawIntake.stopMotor();
   }
-  public void IntakeAlgae(){
+  public void AutoIntakeAlgae(){
     m_ClawIntake.setVoltage(-3.0);
   }
-  public void IntakeAlgaeHold(){
+  public void AutoIntakeAlgaeHold(){
     m_ClawIntake.setVoltage(-0.30);
   }
 }

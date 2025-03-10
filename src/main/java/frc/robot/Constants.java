@@ -73,6 +73,7 @@ public final class Constants {
         public static final String L2Position = "L2Position";
         public static final String L3Position = "L3Position";
         public static final String L4Position = "L4Position";
+        public static final String LoadingPosition = "LoadingPosition";
     }
 
 }
