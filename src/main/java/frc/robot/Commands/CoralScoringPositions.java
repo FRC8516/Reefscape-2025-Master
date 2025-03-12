@@ -20,21 +20,19 @@ public class CoralScoringPositions extends SequentialCommandGroup {
   public CoralScoringPositions(ClawWrist mClawWrist, Elevator mElevator, String Position) {
     if (Position == "L1") {
       addCommands(
-      new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
-      new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position).withTimeout(0.75),
-      new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.80)  
+      new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.50),
+      new MoveElevatorToPosition(mElevator, ElevatorPositions.L1Position).withTimeout(0.75)
+      
       );
     } else if (Position == "L2"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(1.0)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.50),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L2Position).withTimeout(1.0)
       );
     } else if (Position == "L3"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.80),
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(1.0)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.80),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.L3Position).withTimeout(1.0)
       );
     } else if (Position == "L4"){
       addCommands(
@@ -44,9 +42,8 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       );
     } else if (Position == "Home"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(1.0),
         new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition).withTimeout(1.0)
+        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition).withTimeout(0.50)
       );
     } else if (Position == "clawHome"){
       addCommands(
@@ -66,9 +63,8 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       );
     } else if (Position == "Loading"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5),
-        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition).withTimeout(1),
-        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingPosition).withTimeout(0.5)      
+        new MoveWristToPosition(mClawWrist, ClawPositions.LoadingPosition).withTimeout(0.5),
+        new MoveElevatorToPosition(mElevator, ElevatorPositions.LoadingPosition).withTimeout(1)      
       );
     }
   }

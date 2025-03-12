@@ -13,8 +13,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants;
 import frc.robot.Constants.ManipulatorConstants;
 import frc.robot.Constants.OIConstants;
 
@@ -27,8 +25,8 @@ public class ClawIntake extends SubsystemBase {
     private boolean isAfterDetectionRunning = false;
     private boolean isCommandDone = true;
     private boolean Algae = false;
-    private final CommandXboxController operator = new CommandXboxController(
-            Constants.OIConstants.kOperatorControllerPort);
+    private int instance = 0;
+    private boolean inch = false;
     private boolean running = false;
     /** Creates a new ClawIntake. */
   public ClawIntake() {
@@ -43,17 +41,23 @@ public class ClawIntake extends SubsystemBase {
   @Override
   public void periodic() {
     
-    // This method will be called once per scheduler run  
-    if (operator.leftTrigger().getAsBoolean() == true){
-        Intake();
-      }
-       
-        if (running == true){
+    // This method will be called once per scheduler run 
+
+        if (inch == false && running == true && instance == 20 && Algae == false){
           m_ClawIntake.setVoltage(0);
           running = false;
+          instance = 0;
           Algae = false;
-        }else if (Algae == true){
+        }else if (running == true && Algae == true){
           m_ClawIntake.setVoltage(-0.3);
+          Algae = false;
+          running = false;
+        }else if (running == true && instance != 20){
+          instance++;
+        }else if (inch == true){
+            inch = false;
+        }else{
+          instance = 0;
         }
 
     if (m_CoralDetection.getDistance().getValueAsDouble() <= OIConstants.CANRangeDetectRange){
@@ -79,7 +83,7 @@ public class ClawIntake extends SubsystemBase {
   private void AfterDetection() {
     if (isCommandDone == false){
       m_timer.start();
-      while((m_timer.get() < 0.25) == true){
+      while((m_timer.get() < 0.05) == true){
         m_ClawIntake.setVoltage(2.0);
       }
       isCommandDone = true;
@@ -99,10 +103,11 @@ public class ClawIntake extends SubsystemBase {
   public void inch(){
     m_ClawIntake.setVoltage(1.5);
     running = true;
+    inch = true;
   }
   public void intakeAlgae(){
     m_ClawIntake.setVoltage(-3.0);
-    running = false;
+    running = true;
     Algae = true;
   }
  
