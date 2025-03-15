@@ -74,9 +74,9 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "AlgaeIntake"
+            "pathName": "Right Algae"
           }
         }
       ]

@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.804548498709268,
-        "y": 4.058564937269096
+        "x": 6.030547749889041,
+        "y": 4.107640605795072
       },
       "isLocked": false,
       "linkedName": "Middle Reef"
     },
     {
       "anchor": {
-        "x": 5.8305,
-        "y": 4.018930020794971
+        "x": 6.113250000000001,
+        "y": 5.2925
       },
       "prevControl": {
-        "x": 5.871220659533558,
-        "y": 4.265591383572266
+        "x": 5.870605328607296,
+        "y": 5.352696041769591
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Inbetween mid l1 and right Algae "
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -125.13419305691563
   },
   "reversed": false,
   "folder": null,

@@ -127,11 +127,11 @@ public class RobotContainer {
 
         
         // Operator Buttons below\
-        operator.b().onTrue(m_testingHome);
-        operator.a().onTrue(m_HomePosistion);
+        operator.y().onTrue(m_testingHome);
+        operator.b().onTrue(m_HomePosistion);
         //operator.b().onTrue(m_testingTransfer);
-        operator.y().onTrue(m_testingScoringAlgae);
-        operator.x().onTrue(m_testingAlgae);
+        operator.x().onTrue(m_testingScoringAlgae);
+        operator.a().onTrue(m_testingAlgae);
 
         operator.povDown().onTrue(m_LoadingPosition);
         operator.povLeft().onTrue(m_ScoringPositionL1);
@@ -139,16 +139,16 @@ public class RobotContainer {
         operator.povRight().onTrue(m_ScoringPositionL3);
         
         joystick.leftTrigger().onTrue(m_intake);
-        operator.leftTrigger().onTrue(m_intake);
+      //operator.leftTrigger().onTrue(m_intake);
 
         joystick.rightTrigger().onTrue(m_Outake);
-        operator.rightTrigger().onTrue(m_Outake);
+      //operator.rightTrigger().onTrue(m_Outake);
         
         joystick.leftBumper().onTrue(m_AlgaeIntake);
-        operator.leftBumper().onTrue(m_AlgaeIntake);
+      //operator.leftBumper().onTrue(m_AlgaeIntake);
         
         joystick.rightBumper().onTrue(m_AlgaeOutake);
-        operator.rightBumper().onTrue(m_AlgaeOutake);
+      //operator.rightBumper().onTrue(m_AlgaeOutake);
 
         operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);

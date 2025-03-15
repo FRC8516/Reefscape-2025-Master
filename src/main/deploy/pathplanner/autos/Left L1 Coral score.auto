@@ -47,6 +47,25 @@
               }
             ]
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left L1 Reverse"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Home"
+                }
+              }
+            ]
+          }
         }
       ]
     }
