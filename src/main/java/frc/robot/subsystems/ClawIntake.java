@@ -48,14 +48,14 @@ public class ClawIntake extends SubsystemBase {
           running = false;
           instance = 0;
           Algae = false;
-        }else if (running == true && Algae == true){
+        }else if (running == true && Algae == true && instance == 5){
           m_ClawIntake.setVoltage(-0.3);
           Algae = false;
           running = false;
         }else if (running == true && instance != 20){
           instance++;
         }else if (inch == true){
-            inch = false;
+            inch = false;  
         }else{
           instance = 0;
         }
