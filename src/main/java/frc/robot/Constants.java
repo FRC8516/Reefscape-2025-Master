@@ -75,6 +75,9 @@ public final class Constants {
         public static final String L4Position = "L4Position";
         public static final String LoadingPosition = "LoadingPosition";
     }
+    public static final class VisionConstants {
+        public static final String LIMELIGHT_NAME = "";
+    }
 
 }
 

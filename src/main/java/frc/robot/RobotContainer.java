@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Commands.AlignCommand;
 import frc.robot.Commands.CoralScoringPositions;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
@@ -28,6 +29,7 @@ import frc.robot.subsystems.ClawWrist;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.VisionSubsystem;
 
 public class RobotContainer {
     private final SendableChooser<Command> m_autoChooser;
@@ -54,6 +56,7 @@ public class RobotContainer {
     public final ClawWrist m_ClawWrist = new ClawWrist();
     public final Elevator m_elevator = new Elevator();
     public final Climber m_Climber = new Climber();
+    public final VisionSubsystem m_Vision = new VisionSubsystem();
 
     private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1");
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
@@ -78,7 +81,7 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-
+    private final Command m_Align = new AlignCommand(drivetrain, m_Vision);
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -109,6 +112,7 @@ public class RobotContainer {
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
+            joystick.x().whileTrue(m_Align);
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.b()
                 .whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(
