@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.VisionConstants;
-import frc.robot.subsystems.LimelightHelpers.*;
+import frc.robot.subsystems.LimelightHelpers.RawFiducial;
 
 public class VisionSubsystem extends SubsystemBase {
   private RawFiducial[] fiducials;
