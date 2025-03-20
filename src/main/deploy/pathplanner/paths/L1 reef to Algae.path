@@ -3,47 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.57575,
-        "y": 6.16025
+        "x": 5.8305,
+        "y": 4.327249999999999
       },
       "prevControl": null,
       "nextControl": {
-//<<<<<<< AutoTesting
-        "x": 7.079505892784459,
-        "y": 5.974789151393705
-//=======
-        "x": 6.998821721513765,
-        "y": 5.90715856274482
-//>>>>>>> main
+        "x": 6.030547749889041,
+        "y": 4.107640605795072
       },
       "isLocked": false,
-      "linkedName": "Right Home"
+      "linkedName": "Middle Reef"
     },
     {
       "anchor": {
-//<<<<<<< AutoTesting
-        "x": 5.343,
-        "y": 4.883
+        "x": 6.113250000000001,
+        "y": 5.2925
       },
       "prevControl": {
-        "x": 5.132486654060054,
-        "y": 4.748151450948968
+        "x": 5.870605328607296,
+        "y": 5.352696041769591
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Right L1"
-//=======
-        "x": 5.46975,
-        "y": 4.795249999999999
-      },
-      "prevControl": {
-        "x": 5.2680922644132835,
-        "y": 4.6474861421793605
-      },
-      "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Right Reef L1"
-//>>>>>>> main
+      "linkedName": "Inbetween mid l1 and right Algae "
     }
   ],
   "rotationTargets": [],
@@ -60,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -124.56252464888178
+    "rotation": -125.13419305691563
   },
   "reversed": false,
   "folder": null,

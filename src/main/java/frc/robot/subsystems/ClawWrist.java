@@ -32,7 +32,7 @@ public class ClawWrist extends SubsystemBase {
       //backup key values not returned from perference table on shuffleboard....100:1 Gear box
       final double ClawPositionHome = 0.05;
       final double ClawPositionTransfer = 50.0;
-      final double ClawPositionLoading = 0.2;
+      final double ClawPositionLoading = 40.0;
       final double ClawPositionScoring = 30.0;
       final double ClawPositionAlgae = 120.0;
       final double ClawPositionScoringAlgae = 155.0;
@@ -134,6 +134,11 @@ public class ClawWrist extends SubsystemBase {
         //move to Algae Pick Position
         backUp = ClawPositionScoringAlgae;
         Key = ClawScoringAlgaeKey;
+        break;
+      case ClawPositions.LoadingPosition:;
+        //Move to Coral Intake position
+        backUp = ClawPositionLoading;
+        Key = ClawLoadingKey;
         break;
     }
     //gets the current value

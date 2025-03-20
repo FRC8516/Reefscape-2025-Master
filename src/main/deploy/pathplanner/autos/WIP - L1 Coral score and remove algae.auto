@@ -47,6 +47,37 @@
               }
             ]
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Scoring L2"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "L1 reef to Algae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Algae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right Algae"
+          }
         }
       ]
     }

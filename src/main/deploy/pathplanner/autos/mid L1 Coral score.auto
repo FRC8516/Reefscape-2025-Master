@@ -55,7 +55,11 @@
               {
                 "type": "path",
                 "data": {
+//<<<<<<< AutoTesting
+                  "pathName": "L1 Reef reverse"
+//=======
                   "pathName": "Home From mid reef"
+//>>>>>>> main
                 }
               },
               {

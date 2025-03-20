@@ -63,6 +63,7 @@ public final class Constants {
         public static final String TransferPosition = "TransferPostion";
         public static final String AlgaePosition = "AlgaePositon";
         public static final String AlgaeScoringPosition = "AlgaeScoringPositon";
+        public static final String LoadingPosition = "LoadingPosition";
     }
 
     //Elevator Positions
@@ -72,6 +73,10 @@ public final class Constants {
         public static final String L2Position = "L2Position";
         public static final String L3Position = "L3Position";
         public static final String L4Position = "L4Position";
+        public static final String LoadingPosition = "LoadingPosition";
+    }
+    public static final class VisionConstants {
+        public static final String LIMELIGHT_NAME = "";
     }
 
 }

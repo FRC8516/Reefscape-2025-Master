@@ -8,8 +8,6 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
-import java.time.Instant;
-
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -23,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Commands.AlignCommand;
 import frc.robot.Commands.CoralScoringPositions;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
@@ -30,7 +29,8 @@ import frc.robot.subsystems.ClawWrist;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
-@SuppressWarnings("unused")
+import frc.robot.subsystems.VisionSubsystem;
+
 public class RobotContainer {
     private final SendableChooser<Command> m_autoChooser;
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -56,6 +56,7 @@ public class RobotContainer {
     public final ClawWrist m_ClawWrist = new ClawWrist();
     public final Elevator m_elevator = new Elevator();
     public final Climber m_Climber = new Climber();
+    public final VisionSubsystem m_Vision = new VisionSubsystem();
 
     private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1");
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
@@ -64,18 +65,23 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4");
     public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
-    private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,
-            "clawTransfer");
-    private final CoralScoringPositions m_testingScoring = new CoralScoringPositions(m_ClawWrist, m_elevator,
+    //private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,"clawTransfer");
+    private final CoralScoringPositions m_testingScoringAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawScoring");
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
+    private final CoralScoringPositions m_LoadingPosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading");
+    
     private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
-    private final Command m_Algaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae());
-    private final Command m_outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
-    private final Command m_Algaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae());
+    private final Command m_Outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
+    private final Command m_AlgaeIntake = m_ClawIntake.runOnce(() -> m_ClawIntake.intakeAlgae());
+    private final Command m_AlgaeOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae());
+    private final Command m_inch = m_ClawIntake.runOnce(() -> m_ClawIntake.inch());
+    private final Command m_autoAlgaeintake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoIntakeAlgae());
+    private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
+    private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-
+    private final Command m_Align = new AlignCommand(drivetrain, m_Vision);
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -83,10 +89,11 @@ public class RobotContainer {
         NamedCommands.registerCommand("Scoring L3", m_ScoringPositionL3);
         NamedCommands.registerCommand("Algae", m_testingAlgae);
         NamedCommands.registerCommand("Intake", m_intake);
-        NamedCommands.registerCommand("Output", m_outake);
-        NamedCommands.registerCommand("AlgaeIntake", m_Algaeintake);
-        NamedCommands.registerCommand("AlgaeOutput", m_Algaeoutake);
+        NamedCommands.registerCommand("Output", m_autoOutake);
+        NamedCommands.registerCommand("AlgaeIntake", m_autoAlgaeintake);
+        NamedCommands.registerCommand("AlgaeOutput", m_autoAlgaeoutake);
         NamedCommands.registerCommand("StopMotors", m_Stop);
+        NamedCommands.registerCommand("Loading", m_LoadingPosition);
         m_autoChooser = AutoBuilder.buildAutoChooser();
         configureBindings();
         SmartDashboard.putData("Auto Chooser", m_autoChooser);
@@ -105,6 +112,7 @@ public class RobotContainer {
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
+            joystick.x().whileTrue(m_Align);
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.b()
                 .whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(
@@ -123,29 +131,30 @@ public class RobotContainer {
 
         
         // Operator Buttons below\
-        operator.a().onTrue(m_testingHome);
-        operator.b().onTrue(m_testingTransfer);
-        operator.y().onTrue(m_testingScoring);
-        operator.x().onTrue(m_testingAlgae);
+        operator.y().onTrue(m_testingHome);
+        operator.b().onTrue(m_HomePosistion);
+        //operator.b().onTrue(m_testingTransfer);
+        operator.x().onTrue(m_testingScoringAlgae);
+        operator.a().onTrue(m_testingAlgae);
 
-        operator.povDown().onTrue(m_HomePosistion);
+        operator.povDown().onTrue(m_LoadingPosition);
         operator.povLeft().onTrue(m_ScoringPositionL1);
         operator.povUp().onTrue(m_ScoringPositionL2);
         operator.povRight().onTrue(m_ScoringPositionL3);
-        /*
-         * For safety leave commented out during testing
-         * //POV is the D-Pad
-         * operator.povUp().onTrue(m_ScoringPositionL1);
-         * operator.povRight().onTrue(m_ScoringPositionL2);
-         * operator.povDown().onTrue(m_ScoringPositionL3);
-         * //operator.povLeft().onTrue(m_ScoringPositionL4); //Uncomment when elevator
-         * reaches L4
-         
-        operator.leftTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Intake()));
-        operator.leftBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.IntakeAlgae()));
-        operator.rightTrigger().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.Output()));
-        operator.rightBumper().onTrue(m_ClawIntake.runOnce(() -> m_ClawIntake.OutputAlgae()));
-*/
+        
+        joystick.leftTrigger().onTrue(m_intake);
+      //operator.leftTrigger().onTrue(m_intake);
+
+        joystick.rightTrigger().onTrue(m_Outake);
+      //operator.rightTrigger().onTrue(m_Outake);
+        
+        joystick.leftBumper().onTrue(m_AlgaeIntake);
+      //operator.leftBumper().onTrue(m_AlgaeIntake);
+        
+        joystick.rightBumper().onTrue(m_AlgaeOutake);
+      //operator.rightBumper().onTrue(m_AlgaeOutake);
+
+        operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
