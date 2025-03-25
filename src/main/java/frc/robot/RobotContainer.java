@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.AlignCommand;
 import frc.robot.Commands.CoralScoringPositions;
+import frc.robot.Commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
@@ -81,7 +82,7 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-    private final Command m_Align = new AlignCommand(drivetrain, m_Vision);
+    private final Command m_Align = new TranslationAlignToTag(1,drivetrain);
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
