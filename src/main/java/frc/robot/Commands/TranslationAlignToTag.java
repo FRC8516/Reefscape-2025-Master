@@ -49,11 +49,12 @@ public class TranslationAlignToTag extends Command {
         m_branch = branch;  // This also matches the pipeline number
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
-        System.out.println("part");
+        System.out.println("tag");
     }
 
     @Override
     public void initialize() {
+        System.out.println("intizulaizeing");
         NetworkTableInstance.getDefault().getTable("front").getEntry("pipeline").setDouble(m_branch);
         m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
