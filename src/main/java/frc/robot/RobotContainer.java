@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Commands.AlignCommand;
 import frc.robot.Commands.CoralScoringPositions;
 import frc.robot.Commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
@@ -72,7 +71,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
     private final CoralScoringPositions m_LoadingPosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading");
-    
+    private final CoralScoringPositions m_Climbing = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
     private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
     private final Command m_Outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
     private final Command m_AlgaeIntake = m_ClawIntake.runOnce(() -> m_ClawIntake.intakeAlgae());
@@ -82,7 +81,7 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-    private final Command m_Align = new TranslationAlignToTag(1,drivetrain);
+    private final Command m_Align = new TranslationAlignToTag(2,drivetrain);
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -135,7 +134,7 @@ public class RobotContainer {
         operator.y().onTrue(m_testingHome);
         operator.b().onTrue(m_HomePosistion);
         //operator.b().onTrue(m_testingTransfer);
-        operator.x().onTrue(m_testingScoringAlgae);
+        operator.x().onTrue(m_Align);
         operator.a().onTrue(m_testingAlgae);
 
         operator.povDown().onTrue(m_LoadingPosition);
@@ -155,6 +154,7 @@ public class RobotContainer {
         joystick.rightBumper().onTrue(m_AlgaeOutake);
       //operator.rightBumper().onTrue(m_AlgaeOutake);
 
+        operator.back().onTrue(m_Climbing);
         operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }

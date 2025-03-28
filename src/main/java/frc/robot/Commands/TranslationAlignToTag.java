@@ -31,6 +31,7 @@ public class TranslationAlignToTag extends Command {
     private int m_tagId;
     private int m_lockedTagId;
     private boolean m_validTagId;
+    @SuppressWarnings("unused")
     private boolean m_onTarget;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
     private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
@@ -48,11 +49,12 @@ public class TranslationAlignToTag extends Command {
         m_branch = branch;  // This also matches the pipeline number
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
+        System.out.println("part");
     }
 
     @Override
     public void initialize() {
-        NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("pipeline").setDouble(m_branch);
+        NetworkTableInstance.getDefault().getTable("front").getEntry("pipeline").setDouble(m_branch);
         m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
@@ -70,15 +72,17 @@ public class TranslationAlignToTag extends Command {
 
         // Have a valid AprilTag ID
         if (m_validTagId) {
-            
+            System.out.println("valid april tag");
             // Lock onto the first valid AprilTag ID
             if (m_lockedTagId == 0) {
+                System.out.println("locking...");
                 m_lockedTagId = m_tagId;
                 m_targetTx = FieldCalibrations.m_coralReefTargets.get(m_lockedTagId).get(m_branch);
             }
             
             // Only servo to the locked AprilTag ID
             if (m_lockedTagId == m_tagId) {
+                System.out.println("working...");
                 m_currentTx = NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tx")
                                                   .getDouble(DriverCalibrations.kLimelightDefaultKTx);
                 m_errorTx = m_currentTx - m_targetTx;
