@@ -53,30 +53,18 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Scoring L2"
+                  "pathName": "Mid L1 to left Loading"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "L1 reef to Algae"
+                  "name": "Home"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Algae"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right Algae"
           }
         }
       ]

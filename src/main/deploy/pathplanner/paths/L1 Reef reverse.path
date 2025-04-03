@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.153836394064993,
-        "y": 4.319154580074263
+        "x": 6.115530090055728,
+        "y": 4.283132494622148
       },
       "isLocked": false,
       "linkedName": "Middle Reef"
     },
     {
       "anchor": {
-        "x": 6.58125,
-        "y": 4.327249999999999
+        "x": 7.572366667736861,
+        "y": 4.088700619617715
       },
       "prevControl": {
-        "x": 6.331270144164101,
-        "y": 4.330423590437234
+        "x": 7.235813389094926,
+        "y": 4.13735110598845
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Home"
     }
   ],
   "rotationTargets": [],

@@ -81,7 +81,7 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-    private final Command m_Align = new TranslationAlignToTag(3,drivetrain);
+    private final Command m_Align = new TranslationAlignToTag(1,drivetrain);
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -112,9 +112,10 @@ public class RobotContainer {
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
-            joystick.x().whileTrue(m_Align);
+            joystick.b().whileTrue(m_Align);
+            
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        joystick.b()
+        joystick.povDown()
                 .whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(
                         new Rotation2d(-MathUtil.applyDeadband(joystick.getLeftY(), OIConstants.kDriveDeadband),
                                 -MathUtil.applyDeadband(joystick.getLeftX(), OIConstants.kDriveDeadband)))));
@@ -134,9 +135,10 @@ public class RobotContainer {
         operator.y().onTrue(m_testingHome);
         operator.b().onTrue(m_HomePosistion);
         //operator.b().onTrue(m_testingTransfer);
-        operator.x().whileTrue(m_Align);
+        operator.x().onTrue(m_testingScoringAlgae);
         operator.a().onTrue(m_testingAlgae);
-
+        
+        operator.leftTrigger().whileTrue(m_Align);
         operator.povDown().onTrue(m_LoadingPosition);
         operator.povLeft().onTrue(m_ScoringPositionL1);
         operator.povUp().onTrue(m_ScoringPositionL2);
@@ -154,7 +156,7 @@ public class RobotContainer {
         joystick.rightBumper().onTrue(m_AlgaeOutake);
       //operator.rightBumper().onTrue(m_AlgaeOutake);
 
-        operator.back().onTrue(m_Climbing);
+      
         operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }

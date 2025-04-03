@@ -28,6 +28,9 @@ public class TranslationAlignToTag extends Command {
     private double m_targetTx;
     private double m_currentTx;
     private double m_errorTx;
+    private double m_targetTy;
+    private double m_currentTy;
+    private double m_errorTy;
     private int m_tagId;
     private int m_lockedTagId;
     private boolean m_validTagId;
@@ -55,7 +58,7 @@ public class TranslationAlignToTag extends Command {
     @Override
     public void initialize() {
         System.out.println("intizulaizeing");
-        NetworkTableInstance.getDefault().getTable("front").getEntry("pipeline").setDouble(m_branch);
+        NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("pipeline").setDouble(m_branch);
         m_onTarget = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
@@ -63,8 +66,10 @@ public class TranslationAlignToTag extends Command {
 
     @Override
     public void execute() {
+        System.out.println("executing");
         m_tagId = (int) NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tid")
-                                            .getInteger(0);  // Get the current AprilTag ID
+                                            .getInteger(69);  // Get the current AprilTag ID
+        System.out.println(m_tagId);
         m_validTagId = FieldCalibrations.m_validTagIds.contains(m_tagId);  // Make sure it's a coral reef AprilTag ID
 
         // Default to doing nothing
@@ -86,11 +91,14 @@ public class TranslationAlignToTag extends Command {
                 System.out.println("working...");
                 m_currentTx = NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tx")
                                                   .getDouble(DriverCalibrations.kLimelightDefaultKTx);
+                m_currentTy = NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("ty")
+                                                  .getDouble(DriverCalibrations.kLimelightDefaultKTx);
                 m_errorTx = m_currentTx - m_targetTx;
+                m_errorTy = m_currentTy - m_targetTy;
                 m_xspeed = m_profiledPid.calculate(-m_errorTx);
-                m_yspeed = DriverCalibrations.kAprilTagTranslationYRate;
+                m_yspeed = m_profiledPid.calculate(-m_errorTy);//DriverCalibrations.kAprilTagTranslationYRate;
                 if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
-
+                    System.out.println("on target");
                     m_onTarget = true;
                 }
             }
