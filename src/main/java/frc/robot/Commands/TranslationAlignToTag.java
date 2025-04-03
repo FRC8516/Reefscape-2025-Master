@@ -31,10 +31,11 @@ public class TranslationAlignToTag extends Command {
     private double m_targetTy;
     private double m_currentTy;
     private double m_errorTy;
+    private String ab;
+    private boolean ran;
     private int m_tagId;
     private int m_lockedTagId;
     private boolean m_validTagId;
-    @SuppressWarnings("unused")
     private boolean m_onTarget;
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
     private final ProfiledPIDController m_profiledPid = new ProfiledPIDController(
@@ -48,25 +49,27 @@ public class TranslationAlignToTag extends Command {
      *
      * @param drivetrain The drivetrain
      */
-    public TranslationAlignToTag(int branch, CommandSwerveDrivetrain drivetrain) {
+    public TranslationAlignToTag(int branch, CommandSwerveDrivetrain drivetrain, String ba) {
         m_branch = branch;  // This also matches the pipeline number
         m_drivetrain = drivetrain;
+        ab = ba;
+        
         addRequirements(drivetrain);
         System.out.println("tag");
     }
 
     @Override
     public void initialize() {
-        System.out.println("intizulaizeing");
+        
         NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("pipeline").setDouble(m_branch);
         m_onTarget = false;
+        ran = false;
         m_targetTx = 0.0;  // Once a valid target is found, use the hashmap to set this target
         m_lockedTagId = 0;  // Init with an invalid AprilTag ID
     }
 
     @Override
     public void execute() {
-        System.out.println("executing");
         m_tagId = (int) NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tid")
                                             .getInteger(69);  // Get the current AprilTag ID
         System.out.println(m_tagId);
@@ -103,10 +106,18 @@ public class TranslationAlignToTag extends Command {
                 }
             }
         }
-
-        // Apply the robot-centric translation speeds
+        if (m_onTarget == true){
+            if (ab == "left" && ran == false){
+                m_drivetrain.setControl(m_swerveRequest.withVelocityY(2));
+                ran = true;
+            } else if (ab == "right" && ran == false){
+                m_drivetrain.setControl(m_swerveRequest.withVelocityY(-2));
+                ran = true;
+            }
+        }else{
+            // Apply the robot-centric translation speeds
         m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_xspeed).withVelocityY(m_yspeed));
-
+        }
     }
     
     @Override
