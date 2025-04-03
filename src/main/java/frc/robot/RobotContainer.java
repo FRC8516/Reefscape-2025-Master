@@ -134,7 +134,7 @@ public class RobotContainer {
         operator.y().onTrue(m_testingHome);
         operator.b().onTrue(m_HomePosistion);
         //operator.b().onTrue(m_testingTransfer);
-        operator.x().onTrue(m_Align);
+        operator.x().whileTrue(m_Align);
         operator.a().onTrue(m_testingAlgae);
 
         operator.povDown().onTrue(m_LoadingPosition);
