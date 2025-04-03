@@ -21,19 +21,19 @@ public class VisionSubsystem extends SubsystemBase {
 
     // LimelightHelpers.setCropWindow("", -0.5, 0.5, -0.5, 0.5);
     LimelightHelpers.setCameraPose_RobotSpace(
-        "",
+        "front",
         0.3556, 
         0.1016,
         0.3429,
         0,
         -2,
         0);
-    LimelightHelpers.SetFiducialIDFiltersOverride("", new int[] {0,1,5,8,9,10,11,12});
+    LimelightHelpers.SetFiducialIDFiltersOverride("front", new int[] {});
   }
 
   @Override
   public void periodic() {
-    fiducials = LimelightHelpers.getRawFiducials("");
+    fiducials = LimelightHelpers.getRawFiducials("front");
 
   }
   public RawFiducial getClosestFiducial() {

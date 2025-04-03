@@ -57,12 +57,12 @@ public class AlignCommand extends Command {
     
 
     try {
-      fiducial = m_Limelight.getFiducialWithId(1/*m_Limelight.tagID*/);
+      fiducial = m_Limelight.getClosestFiducial();
 
       rotationalRate = rotationalPidController.calculate(2*fiducial.txnc, 0.0) * 0.75* 0.9;
       
-      final double velocityX = xPidController.calculate(fiducial.distToRobot, 0.1) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.7;
-        
+      final double velocityX = xPidController.calculate(fiducial.distToRobot, 0.5) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.7;
+      final double velocityY = yPidController.calculate(fiducial.distToRobot, 0.5) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.7;
       if (rotationalPidController.atSetpoint() && xPidController.atSetpoint()) {
         this.end(true);
       }
@@ -72,11 +72,12 @@ public class AlignCommand extends Command {
       SmartDashboard.putNumber("rotationalPidController", rotationalRate);
       SmartDashboard.putNumber("xPidController", velocityX);
       m_drivetrain.setControl(
-          alignRequest.withRotationalRate(-rotationalRate).withVelocityX(-velocityX));//.withVelocityY(velocityY));
-      // drivetrain.applyRequest(() -> alignRequest.withRotationalRate(0.5 *
-      // MaxAngularRate)
-      // .withVelocityX(xPidController.calculate(0.2 * MaxSpeed)));
+          alignRequest.withRotationalRate(-rotationalRate).withVelocityX(-velocityX).withVelocityY(velocityY));
+       //drivetrain.applyRequest(() -> alignRequest.withRotationalRate(0.5 *
+       //MaxAngularRate)
+     // .withVelocityX(xPidController.calculate(0.2 * MaxSpeed)));
       // drivetrain.setControl(brake);
+      System.out.println("Yes");
     } catch (VisionSubsystem.NoSuchTargetException nste) { 
       System.out.println("No apriltag found");
       if ((rotationalRate != 0) && (velocityX != 0)){
