@@ -3,45 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.730122950819672,
-        "y": 4.318698770491803
+        "x": 7.55625,
+        "y": 1.9092499999999994
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.842480063480962,
-        "y": 4.60945908204045
+        "x": 8.05584637657325,
+        "y": 1.7162126891756833
       },
       "isLocked": false,
-      "linkedName": "Middle Reef"
+      "linkedName": "Left Home"
     },
     {
       "anchor": {
-        "x": 5.64525,
-        "y": 2.8744999999999994
+        "x": 5.25525,
+        "y": 3.0597499999999993
       },
       "prevControl": {
-        "x": 5.738637935098202,
-        "y": 3.106402336292875
-      },
-      "nextControl": {
-        "x": 5.405822529851243,
-        "y": 2.279950076160231
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.9305,
-        "y": 0.8952499999999998
-      },
-      "prevControl": {
-        "x": 1.695566800483658,
-        "y": 0.8097725657555479
+        "x": 5.394619739755598,
+        "y": 2.8522022328704613
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Left Loading"
+      "linkedName": "left L2"
     }
   ],
   "rotationTargets": [],
@@ -58,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -137.4195092166563
+    "rotation": 121.02706675991273
   },
   "reversed": false,
   "folder": null,

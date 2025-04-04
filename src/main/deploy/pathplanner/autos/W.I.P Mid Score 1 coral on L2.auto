@@ -17,7 +17,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "score 1 Go to reef"
+                  "pathName": "left home to L2"
                 }
               }
             ]
@@ -43,6 +43,25 @@
                 "type": "named",
                 "data": {
                   "name": "StopMotors"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left L2 to left loading"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Home"
                 }
               }
             ]

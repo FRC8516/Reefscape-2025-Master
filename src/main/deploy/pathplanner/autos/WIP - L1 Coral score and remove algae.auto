@@ -68,15 +68,41 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Algae"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Algae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Algae"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "Right Algae"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlgaeIntake"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlgaeIntake"
+                }
+              }
+            ]
           }
         }
       ]
