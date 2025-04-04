@@ -51,7 +51,7 @@ public class CoralScoringPositions extends SequentialCommandGroup {
       );
     } else if (Position == "clawTransfer"){
       addCommands(
-        new MoveWristToPosition(mClawWrist, ClawPositions.TransferPosition).withTimeout(0.5)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.5)
       );
     } else if (Position == "clawScoring"){
       addCommands(

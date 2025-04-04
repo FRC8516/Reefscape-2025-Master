@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.VisionConstants;
+import frc.robot.subsystems.LimelightHelpers.PoseEstimate;
 import frc.robot.subsystems.LimelightHelpers.RawFiducial;
 
 public class VisionSubsystem extends SubsystemBase {
@@ -21,20 +22,19 @@ public class VisionSubsystem extends SubsystemBase {
 
     // LimelightHelpers.setCropWindow("", -0.5, 0.5, -0.5, 0.5);
     LimelightHelpers.setCameraPose_RobotSpace(
-        "front",
+        "limelight-front",
         0.3556, 
         0.1016,
         0.3429,
         0,
         -2,
         0);
-    LimelightHelpers.SetFiducialIDFiltersOverride("front", new int[] {});
+    LimelightHelpers.SetFiducialIDFiltersOverride("limelight-front", new int[] {});
   }
 
   @Override
   public void periodic() {
-    fiducials = LimelightHelpers.getRawFiducials("front");
-
+    fiducials = LimelightHelpers.getRawFiducials("limelight-front");
   }
   public RawFiducial getClosestFiducial() {
     if (fiducials == null || fiducials.length == 0) {
@@ -53,7 +53,9 @@ public class VisionSubsystem extends SubsystemBase {
 
     return closest;
   }
-
+public PoseEstimate getPose3D(){
+  return LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight-front");
+}
   public RawFiducial getFiducialWithId(int id) {
   
     for (RawFiducial fiducial : fiducials) {

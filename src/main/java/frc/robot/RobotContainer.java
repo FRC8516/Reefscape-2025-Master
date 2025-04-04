@@ -61,7 +61,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1");
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
-   
+   private final CoralScoringPositions m_transfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
     public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     //private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,"clawTransfer");
@@ -79,8 +79,8 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-    private final Command m_AlignLeft = new TranslationAlignToTag(1,drivetrain,"left");
-    private final Command m_AlignRight = new TranslationAlignToTag(1, drivetrain, "right");
+    //private final Command m_AlignLeft = new TranslationAlignToTag(1,drivetrain,"left");
+    //private final Command m_AlignRight = new TranslationAlignToTag(1, drivetrain, "right");
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -111,9 +111,9 @@ public class RobotContainer {
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
-            joystick.b().whileTrue(m_AlignRight);
-            joystick.x().whileTrue(m_AlignLeft);
-            
+           // joystick.b().whileTrue(m_AlignRight);
+            //joystick.x().whileTrue(m_AlignLeft);
+
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.povDown()
                 .whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(
@@ -156,7 +156,7 @@ public class RobotContainer {
         joystick.rightBumper().onTrue(m_AlgaeOutake);
       //operator.rightBumper().onTrue(m_AlgaeOutake);
 
-      
+      operator.back().onTrue(m_transfer);
         operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }

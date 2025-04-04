@@ -74,7 +74,7 @@ public class TranslationAlignToTag extends Command {
                                             .getInteger(69);  // Get the current AprilTag ID
         System.out.println(m_tagId);
         m_validTagId = FieldCalibrations.m_validTagIds.contains(m_tagId);  // Make sure it's a coral reef AprilTag ID
-
+        
         // Default to doing nothing
         m_xspeed = 0.0;
         m_yspeed = 0.0;
@@ -98,6 +98,7 @@ public class TranslationAlignToTag extends Command {
                                                   .getDouble(DriverCalibrations.kLimelightDefaultKTx);
                 m_errorTx = m_currentTx - m_targetTx;
                 m_errorTy = m_currentTy - m_targetTy;
+
                 m_xspeed = m_profiledPid.calculate(-m_errorTx);
                 m_yspeed = m_profiledPid.calculate(-m_errorTy);//DriverCalibrations.kAprilTagTranslationYRate;
                 if (Math.abs(m_errorTx) < DriverCalibrations.kAprilTagTranslationXOnTarget) {
@@ -116,7 +117,7 @@ public class TranslationAlignToTag extends Command {
             }
         }else{
             // Apply the robot-centric translation speeds
-        m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_xspeed).withVelocityY(m_yspeed));
+        m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_xspeed).withVelocityY(m_yspeed).withRotationalRate(null));
         }
     }
     
