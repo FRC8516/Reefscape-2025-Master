@@ -11,13 +11,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Mid Home To L1"
+                  "pathName": "Right Home to L2-1"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Scoring L1"
+                  "name": "Scoring L2"
                 }
               }
             ]
@@ -49,19 +49,13 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "Scoot for L1"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "L1 Reef reverse"
+                  "pathName": "Right L2 to Loading"
                 }
               },
               {

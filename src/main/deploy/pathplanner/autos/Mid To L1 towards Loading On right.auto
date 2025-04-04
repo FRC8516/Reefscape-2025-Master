@@ -49,6 +49,12 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Scoot for L1"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
