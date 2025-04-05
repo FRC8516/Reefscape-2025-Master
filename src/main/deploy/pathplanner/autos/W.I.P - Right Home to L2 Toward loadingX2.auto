@@ -93,7 +93,38 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": null
+                  "pathName": "Right Loading to L2-2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Scoring L2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Output"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopMotors"
                 }
               }
             ]
@@ -103,6 +134,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Right",
   "choreoAuto": false
 }

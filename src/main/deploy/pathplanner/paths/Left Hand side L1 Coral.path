@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.396205484122389,
-        "y": 0.9212590965019891
+        "x": 7.350861891964872,
+        "y": 0.9322682664255901
       },
       "isLocked": false,
       "linkedName": "Left Home"
@@ -20,8 +20,8 @@
         "y": 3.1079405737704913
       },
       "prevControl": {
-        "x": 5.644008807531754,
-        "y": 2.7862915579862895
+        "x": 5.625455779397233,
+        "y": 2.81104507122964
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 121.02706675991273
+    "rotation": 119.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

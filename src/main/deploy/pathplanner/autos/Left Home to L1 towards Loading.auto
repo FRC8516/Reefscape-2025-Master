@@ -55,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left L1 Reverse"
+                  "pathName": "Left L1 to Loading"
                 }
               },
               {
@@ -71,6 +71,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Left",
   "choreoAuto": false
 }
