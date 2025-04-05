@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.CoralScoringPositions;
-import frc.robot.Commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
