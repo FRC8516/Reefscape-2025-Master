@@ -43,7 +43,7 @@ public class CoralScoringPositions extends SequentialCommandGroup {
     } else if (Position == "Home"){
       addCommands(
         new MoveElevatorToPosition(mElevator, ElevatorPositions.HomePosition).withTimeout(1.0),
-        new MoveWristToPosition(mClawWrist, ClawPositions.HomePosition).withTimeout(0.50)
+        new MoveWristToPosition(mClawWrist, ClawPositions.ScoringPosition).withTimeout(0.50)
       );
     } else if (Position == "clawHome"){
       addCommands(
