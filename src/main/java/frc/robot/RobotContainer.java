@@ -106,11 +106,11 @@ public class RobotContainer {
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() -> drive
                 // Drive forward with negative Y (forward)
-                .withVelocityX(-MathUtil.applyDeadband(joystick.getLeftY(), OIConstants.kDriveDeadband) * MaxSpeed)
+                .withVelocityX(-MathUtil.applyDeadband(joystick.getLeftY()/1.5, OIConstants.kDriveDeadband) * MaxSpeed)
                 // Drive left with negitive X (left)
-                .withVelocityY(-MathUtil.applyDeadband(joystick.getLeftX(), OIConstants.kDriveDeadband) * MaxSpeed) 
+                .withVelocityY(-MathUtil.applyDeadband(joystick.getLeftX()/1.5, OIConstants.kDriveDeadband) * MaxSpeed) 
                 // Drive counterclockwise with negative X (left)
-                .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX(), OIConstants.kDriveDeadband) * MaxAngularRate)
+                .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX()/1.05, OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
             joystick.x().whileTrue(m_Align);
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
