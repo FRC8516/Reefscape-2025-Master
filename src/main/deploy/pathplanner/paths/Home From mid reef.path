@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.8305,
-        "y": 4.327249999999999
+        "x": 5.69,
+        "y": 4.318698770491803
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.8765734838118355,
-        "y": 4.175901014730953
+        "x": 6.8819135241529725,
+        "y": 4.1842486053098735
       },
       "isLocked": false,
       "linkedName": "Middle Reef"
     },
     {
       "anchor": {
-        "x": 7.572366667736861,
+        "x": 7.91,
         "y": 4.088700619617715
       },
       "prevControl": {
-        "x": 6.80266919880408,
-        "y": 4.189203017048963
+        "x": 7.106911651225812,
+        "y": 4.169551112827725
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Middle",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

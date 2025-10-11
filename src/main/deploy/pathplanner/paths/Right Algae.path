@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.113250000000001,
-        "y": 5.2925
+        "x": 6.868954918032787,
+        "y": 5.08775
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.541381502289022,
-        "y": 5.376621424015139
+        "x": 7.344668951684512,
+        "y": 5.090113059474076
       },
       "isLocked": false,
       "linkedName": "Inbetween mid l1 and right Algae "
@@ -20,8 +20,8 @@
         "y": 5.08775
       },
       "prevControl": {
-        "x": 4.834424993974867,
-        "y": 5.0396288880140085
+        "x": 4.829994719109668,
+        "y": 5.076691081997274
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,10 +45,10 @@
     "rotation": -120.06858282186244
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -125.13419305691563
+    "rotation": -152.1759036157467
   },
   "useDefaultConstraints": true
 }

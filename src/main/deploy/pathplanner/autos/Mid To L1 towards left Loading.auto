@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Hand side L1 Coral"
+                  "pathName": "Mid Home To L1"
                 }
               },
               {
@@ -55,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left L1 Reverse"
+                  "pathName": "Mid L1 to left Loading"
                 }
               },
               {
@@ -71,6 +71,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Middle",
   "choreoAuto": false
 }

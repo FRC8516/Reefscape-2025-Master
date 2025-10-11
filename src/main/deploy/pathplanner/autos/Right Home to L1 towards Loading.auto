@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Mid Home To L1"
+                  "pathName": "Home to Right L1"
                 }
               },
               {
@@ -53,53 +53,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L2"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "L1 reef to Algae"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Right Algae"
+                  "pathName": "Right L1 Reef Reverse"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Algae"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlgaeIntake"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlgaeIntake"
+                  "name": "Home"
                 }
               }
             ]
@@ -109,6 +71,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Middle",
+  "folder": "Right",
   "choreoAuto": false
 }

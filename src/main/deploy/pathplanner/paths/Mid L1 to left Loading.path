@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.316,
-        "y": 0.846
+        "x": 5.69,
+        "y": 4.318698770491803
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6228920858353788,
-        "y": 0.9034636126617023
+        "x": 5.802357112661291,
+        "y": 4.60945908204045
+      },
+      "isLocked": false,
+      "linkedName": "Middle Reef"
+    },
+    {
+      "anchor": {
+        "x": 5.64525,
+        "y": 2.8744999999999994
+      },
+      "prevControl": {
+        "x": 5.738637935098202,
+        "y": 3.106402336292875
+      },
+      "nextControl": {
+        "x": 5.405822529851243,
+        "y": 2.279950076160231
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.0142861035989315,
-        "y": 2.7215482975102008
+        "x": 1.9305,
+        "y": 0.8952499999999998
       },
       "prevControl": {
-        "x": 4.159675589949486,
-        "y": 2.012652185265216
+        "x": 1.695566800483658,
+        "y": 0.8097725657555479
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Loading"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +58,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.01373334645511
+    "rotation": -137.4195092166563
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Middle",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 55.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

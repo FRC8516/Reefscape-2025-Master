@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.CoralScoringPositions;
-import frc.robot.Commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClawIntake;
 import frc.robot.subsystems.ClawWrist;
@@ -61,8 +60,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL1 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L1");
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
-    @SuppressWarnings("unused")
-    private final CoralScoringPositions m_ScoringPositionL4 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L4");
+   private final CoralScoringPositions m_transfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
     public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     //private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,"clawTransfer");
@@ -71,7 +69,6 @@ public class RobotContainer {
     private final CoralScoringPositions m_testingAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
             "clawAlgae");
     private final CoralScoringPositions m_LoadingPosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Loading");
-    private final CoralScoringPositions m_Climbing = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
     private final Command m_intake = m_ClawIntake.runOnce(() -> m_ClawIntake.Intake());
     private final Command m_Outake = m_ClawIntake.runOnce(() -> m_ClawIntake.Output());
     private final Command m_AlgaeIntake = m_ClawIntake.runOnce(() -> m_ClawIntake.intakeAlgae());
@@ -81,7 +78,8 @@ public class RobotContainer {
     private final Command m_autoOutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutput());
     private final Command m_autoAlgaeoutake = m_ClawIntake.runOnce(() -> m_ClawIntake.AutoOutputAlgae());
     private final Command m_Stop = m_ClawIntake.runOnce(() -> m_ClawIntake.StopMotion());
-    private final Command m_Align = new TranslationAlignToTag(3,drivetrain);
+    //private final Command m_AlignLeft = new TranslationAlignToTag(1,drivetrain,"left");
+    //private final Command m_AlignRight = new TranslationAlignToTag(1, drivetrain, "right");
     public RobotContainer() {
         NamedCommands.registerCommand("Home", m_HomePosistion);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
@@ -112,9 +110,11 @@ public class RobotContainer {
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX()/1.05, OIConstants.kDriveDeadband) * MaxAngularRate)
             ));
-            joystick.x().whileTrue(m_Align);
+           // joystick.b().whileTrue(m_AlignRight);
+            //joystick.x().whileTrue(m_AlignLeft);
+
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        joystick.b()
+        joystick.povDown()
                 .whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(
                         new Rotation2d(-MathUtil.applyDeadband(joystick.getLeftY(), OIConstants.kDriveDeadband),
                                 -MathUtil.applyDeadband(joystick.getLeftX(), OIConstants.kDriveDeadband)))));
@@ -134,9 +134,10 @@ public class RobotContainer {
         operator.y().onTrue(m_testingHome);
         operator.b().onTrue(m_HomePosistion);
         //operator.b().onTrue(m_testingTransfer);
-        operator.x().whileTrue(m_Align);
+        operator.x().onTrue(m_testingScoringAlgae);
         operator.a().onTrue(m_testingAlgae);
 
+        
         operator.povDown().onTrue(m_LoadingPosition);
         operator.povLeft().onTrue(m_ScoringPositionL1);
         operator.povUp().onTrue(m_ScoringPositionL2);
@@ -154,7 +155,7 @@ public class RobotContainer {
         joystick.rightBumper().onTrue(m_AlgaeOutake);
       //operator.rightBumper().onTrue(m_AlgaeOutake);
 
-        operator.back().onTrue(m_Climbing);
+      operator.back().onTrue(m_transfer);
         operator.start().onTrue(m_inch);
         drivetrain.registerTelemetry(logger::telemeterize);
     }

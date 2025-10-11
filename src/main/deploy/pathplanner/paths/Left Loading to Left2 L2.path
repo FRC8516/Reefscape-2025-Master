@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.694,
-        "y": 2.659
+        "x": 1.9305,
+        "y": 0.8952499999999998
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.282868961761956,
-        "y": 2.34093749757183
+        "x": 2.330597032630867,
+        "y": 1.2810560991616926
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Loading"
     },
     {
       "anchor": {
-        "x": 4.29975,
-        "y": 2.0457499999999995
+        "x": 4.96275,
+        "y": 2.8939999999999997
       },
       "prevControl": {
-        "x": 3.938541561423183,
-        "y": 2.3241257356982286
+        "x": 3.4502583359620704,
+        "y": 2.065727332975754
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Algae Yeet"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 119.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 58.760785111791265
+    "rotation": -137.4195092166563
   },
   "useDefaultConstraints": true
 }

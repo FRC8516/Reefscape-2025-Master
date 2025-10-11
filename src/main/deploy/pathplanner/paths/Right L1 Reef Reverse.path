@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.15997717576141,
-        "y": 4.712698368158932
+        "x": 5.054417680787335,
+        "y": 5.097043380665709
       },
       "isLocked": false,
       "linkedName": "Right L1"
@@ -20,15 +20,20 @@
         "y": 7.2035
       },
       "prevControl": {
-        "x": 2.3016539491208365,
-        "y": 7.094329428553973
+        "x": 2.3851551519288394,
+        "y": 6.865499663418142
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Loading"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.2850498338870456,
+      "rotationDegrees": -124.59999999999998
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -45,7 +50,7 @@
     "rotation": 134.05304855322657
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -124.56252464888178

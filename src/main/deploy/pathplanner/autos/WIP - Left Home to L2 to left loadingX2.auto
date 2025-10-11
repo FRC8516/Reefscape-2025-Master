@@ -9,15 +9,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Mid Home To L1"
+                  "name": "Scoring L2"
                 }
               },
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Scoring L1"
+                  "pathName": "left home to L2"
                 }
               }
             ]
@@ -53,34 +53,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L2"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "L1 reef to Algae"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Right Algae"
+                  "pathName": "Left L2 to left loading"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Algae"
+                  "name": "Loading"
                 }
               }
             ]
@@ -93,13 +74,57 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlgaeIntake"
+                  "name": "Intake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 1.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left Loading to Left2 L2"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AlgaeIntake"
+                  "name": "Scoring L2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Output"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopMotors"
                 }
               }
             ]
@@ -109,6 +134,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Middle",
+  "folder": "Left",
   "choreoAuto": false
 }

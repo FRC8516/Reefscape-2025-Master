@@ -49,22 +49,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Scoring L2"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "L1 reef to Algae"
-                }
-              }
-            ]
+            "pathName": "Scoot for L1"
           }
         },
         {
@@ -74,32 +61,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Right Algae"
+                  "pathName": "L1 Reef reverse"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Algae"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlgaeIntake"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlgaeIntake"
+                  "name": "Home"
                 }
               }
             ]

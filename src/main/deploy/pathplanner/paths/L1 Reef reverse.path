@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.8305,
-        "y": 4.327249999999999
+        "x": 5.68,
+        "y": 3.86
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.153836394064993,
-        "y": 4.319154580074263
+        "x": 6.1950176621903115,
+        "y": 3.9003225788448495
       },
       "isLocked": false,
-      "linkedName": "Middle Reef"
+      "linkedName": "Mid L2-2"
     },
     {
       "anchor": {
-        "x": 6.58125,
-        "y": 4.327249999999999
+        "x": 7.91,
+        "y": 4.088700619617715
       },
       "prevControl": {
-        "x": 6.331270144164101,
-        "y": 4.330423590437234
+        "x": 7.614700492689995,
+        "y": 4.074682273322015
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Home"
     }
   ],
   "rotationTargets": [],
@@ -45,7 +45,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Middle",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
