@@ -57,5 +57,17 @@
     "edu.wpi.first.math.**.proto.*",
     "edu.wpi.first.math.**.struct.*",
   ],
-  "wpilib.autoStartRioLog": false
+  "wpilib.autoStartRioLog": false,
+  "cSpell.words": [
+    "Algaeintake",
+    "Algaeoutake",
+    "CTRE",
+    "feedforwards",
+    "Holonomic",
+    "Kalman",
+    "Outake",
+    "Quasistatic",
+    "telemeterize",
+    "teleop"
+  ]
 }
