@@ -9,9 +9,11 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.generated.TunerConstants;
+import frc.robot.oi.limelightvision.limelight.frc.LimeLight;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.LimelightHelpers.RawFiducial;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.VisionSubsystem.NoSuchTargetException;
 class PIDControllerConfigurable extends PIDController {
   public PIDControllerConfigurable(double kP, double kI, double kD) {
       super(kP, kI, kD);
@@ -51,7 +53,11 @@ public class AlignCommand extends Command {
 
   @Override
   public void execute() {
-    
+    if (m_Limelight.getClosestFiducial() != null){
+
+    }else{
+      throw new NoSuchTargetException("No fiducials found.");
+    }
     /*
      if april tag is valid
           drive relative to tag, maintain parallel to tag
