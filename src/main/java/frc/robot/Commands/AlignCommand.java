@@ -52,43 +52,19 @@ public class AlignCommand extends Command {
   @Override
   public void execute() {
     
-    RawFiducial fiducial; 
+    /*
+     if april tag is valid
+          drive relative to tag, maintain parallel to tag
+          
+          if want to move to reef
 
-    
+          Left:
+              Move to the left and forward maintain parallel to april tag
+          Right:
+              move right and forward maintain parallel to april tag
 
-    try {
-      fiducial = m_Limelight.getClosestFiducial();
-
-      rotationalRate = rotationalPidController.calculate(2*fiducial.txnc, 0.0) * 0.75* 0.9;
-      
-      final double velocityX = xPidController.calculate(fiducial.distToRobot, 0.5) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.7;
-      final double velocityY = yPidController.calculate(fiducial.distToRobot, 0.5) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.7;
-      if (rotationalPidController.atSetpoint() && xPidController.atSetpoint()) {
-        this.end(true);
-      }
-
-      SmartDashboard.putNumber("txnc", fiducial.txnc);
-      SmartDashboard.putNumber("distToRobot", fiducial.distToRobot);
-      SmartDashboard.putNumber("rotationalPidController", rotationalRate);
-      SmartDashboard.putNumber("xPidController", velocityX);
-      m_drivetrain.setControl(
-          alignRequest.withRotationalRate(-rotationalRate).withVelocityX(-velocityX).withVelocityY(velocityY));
-       //drivetrain.applyRequest(() -> alignRequest.withRotationalRate(0.5 *
-       //MaxAngularRate)
-     // .withVelocityX(xPidController.calculate(0.2 * MaxSpeed)));
-      // drivetrain.setControl(brake);
-      System.out.println("Yes");
-    } catch (VisionSubsystem.NoSuchTargetException nste) { 
-      System.out.println("No apriltag found");
-      if ((rotationalRate != 0) && (velocityX != 0)){
-        m_drivetrain.setControl(
-          alignRequest.withRotationalRate(-rotationalRate).withVelocityX(-velocityX));//.withVelocityY(velocityY));
-        }
-      }
-      
-    }
-  
-
+     */
+  }
   @Override
   public boolean isFinished() {
     return rotationalPidController.atSetpoint() && xPidController.atSetpoint();

@@ -61,7 +61,7 @@ public class RobotContainer {
     private final CoralScoringPositions m_ScoringPositionL2 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L2");
     private final CoralScoringPositions m_ScoringPositionL3 = new CoralScoringPositions(m_ClawWrist, m_elevator, "L3");
    private final CoralScoringPositions m_transfer = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawTransfer");
-    public final CoralScoringPositions m_HomePosistion = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
+    public final CoralScoringPositions m_HomePosition = new CoralScoringPositions(m_ClawWrist, m_elevator, "Home");
     private final CoralScoringPositions m_testingHome = new CoralScoringPositions(m_ClawWrist, m_elevator, "clawHome");
     //private final CoralScoringPositions m_testingTransfer = new CoralScoringPositions(m_ClawWrist, m_elevator,"clawTransfer");
     private final CoralScoringPositions m_testingScoringAlgae = new CoralScoringPositions(m_ClawWrist, m_elevator,
@@ -81,7 +81,7 @@ public class RobotContainer {
     //private final Command m_AlignLeft = new TranslationAlignToTag(1,drivetrain,"left");
     //private final Command m_AlignRight = new TranslationAlignToTag(1, drivetrain, "right");
     public RobotContainer() {
-        NamedCommands.registerCommand("Home", m_HomePosistion);
+        NamedCommands.registerCommand("Home", m_HomePosition);
         NamedCommands.registerCommand("Scoring L1", m_ScoringPositionL1);
         NamedCommands.registerCommand("Scoring L2", m_ScoringPositionL2);
         NamedCommands.registerCommand("Scoring L3", m_ScoringPositionL3);
@@ -105,7 +105,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> drive
                 // Drive forward with negative Y (forward)
                 .withVelocityX(-MathUtil.applyDeadband(joystick.getLeftY()/1.75, OIConstants.kDriveDeadband) * MaxSpeed)
-                // Drive left with negitive X (left)
+                // Drive left with negative X (left)
                 .withVelocityY(-MathUtil.applyDeadband(joystick.getLeftX()/1.75, OIConstants.kDriveDeadband) * MaxSpeed) 
                 // Drive counterclockwise with negative X (left)
                 .withRotationalRate(-MathUtil.applyDeadband(joystick.getRightX()/1.05, OIConstants.kDriveDeadband) * MaxAngularRate)
@@ -132,7 +132,7 @@ public class RobotContainer {
         
         // Operator Buttons below\
         operator.y().onTrue(m_testingHome);
-        operator.b().onTrue(m_HomePosistion);
+        operator.b().onTrue(m_HomePosition);
         //operator.b().onTrue(m_testingTransfer);
         operator.x().onTrue(m_testingScoringAlgae);
         operator.a().onTrue(m_testingAlgae);
