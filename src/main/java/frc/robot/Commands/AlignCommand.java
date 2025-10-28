@@ -1,6 +1,6 @@
 package frc.robot.Commands;
 
-import static edu.wpi.first.units.Units.MetersPerSecond;
+import edu.wpi.first.units.Units;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -27,7 +27,7 @@ class PIDControllerConfigurable extends PIDController {
 public class AlignCommand extends Command {
   private final CommandSwerveDrivetrain m_drivetrain;
   private final VisionSubsystem m_Limelight;
-
+  public final String m_direction;
   private static final PIDControllerConfigurable rotationalPidController = new PIDControllerConfigurable(0.05000, 0.000000, 0.001000, 0.01);
   private static final PIDControllerConfigurable xPidController = new PIDControllerConfigurable(0.400000, 0.000000, 0.000600, 0.01);
   private static final PIDControllerConfigurable yPidController = new PIDControllerConfigurable(0.3, 0, 0, 0.3);
@@ -39,9 +39,10 @@ public class AlignCommand extends Command {
   // private static final SwerveRequest.SwerveDriveBrake brake = new
   // SwerveRequest.SwerveDriveBrake();
 
-  public AlignCommand(CommandSwerveDrivetrain drivetrain, VisionSubsystem limelight) {
+  public AlignCommand(CommandSwerveDrivetrain drivetrain, VisionSubsystem limelight, String direction) {
     this.m_drivetrain = drivetrain;
     this.m_Limelight = limelight;
+    this.m_direction = direction;
     addRequirements(m_Limelight);
   }
 
@@ -54,7 +55,16 @@ public class AlignCommand extends Command {
   @Override
   public void execute() {
     if (m_Limelight.getClosestFiducial() != null){
-
+      if (m_direction =="left"){
+        /*align left
+          Get closest apriltag and check it based off a list of acceptable tags to align to        
+        */
+      }else if(m_direction == "right"){
+        /*align right
+          
+          
+        */
+      }
     }else{
       throw new NoSuchTargetException("No fiducials found.");
     }
