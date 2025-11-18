@@ -63,11 +63,13 @@
     "Algaeoutake",
     "CTRE",
     "feedforwards",
+    "fiducials",
     "Holonomic",
     "Kalman",
     "Outake",
     "Quasistatic",
     "telemeterize",
-    "teleop"
+    "teleop",
+    "tync"
   ]
 }

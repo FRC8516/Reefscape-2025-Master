@@ -57,12 +57,11 @@ public class AlignCommand extends Command {
     if (m_Limelight.getClosestFiducial() != null){
       if (m_direction =="left"){
         /*align left
-          Get closest apriltag and check it based off a list of acceptable tags to align to        
+          Get closest apriltag and check it based off a list of acceptable tags to align to
         */
       }else if(m_direction == "right"){
         /*align right
-          
-          
+          Get closest apriltag and check it based off a list of acceptable tags to align to
         */
       }
     }else{
